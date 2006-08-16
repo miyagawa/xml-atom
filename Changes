@@ -8,6 +8,10 @@ Revision history for XML::Atom
     * Added support of Atom 1.0 <category> parse and generation
     * Added $thing->links and $thing->categories as a moniker method
       that returns an array reference in a scalar context
+    * Fixed a bug in $content->body() where it accidentally thinks the
+      content is not a valid Unicode string even if it is, if you call
+      eval {} in elsewhere in the code and $@ is left set.
+      (Thanks to Chris Dent for the patch)
 
 0.21  2006.07.13
     * propagate $entry's version when we create content element off of entry
