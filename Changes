@@ -2,7 +2,7 @@ $Id$
 
 Revision history for XML::Atom
 
-0.10
+0.10  2004.12.31
     - Eliminated unitialized value warning on <link /> attributes that
       aren't set.
     - Added XML::Atom::Feed->version to get and set the version of the feed.
