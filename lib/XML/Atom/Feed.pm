@@ -305,8 +305,15 @@ still binary data, without Unicode flag set.
 =head1 CREATING ATOM 1.0 FEEDS
 
 By default, XML::Atom::Feed and other classes (Entry, Link and
-Content) will create entities using Atom 0.3 namespaces. You can
-override the default version number by setting
+Content) will create entities using Atom 0.3 namespaces. In order to
+create 1.0 feed and entry elements, you can set I<Version> as a
+parameter, like:
+
+  $feed = XML::Atom::Feed->new(Version => 1.0);
+  $entry = XML::Atom::Entry->new(Version => 1.0);
+
+Setting those Version to every element would be sometimes painful. In
+that case, you can override the default version number by setting
 C<$XML::Atom::DefaultVersion> global variable to "1.0".
 
   use XML::Atom;
