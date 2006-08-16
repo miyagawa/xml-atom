@@ -91,7 +91,7 @@ sub version {
     if (@_) {
         $elem->setAttribute('version', $_[0]);
     }
-    $elem->getAttribute('version');
+    $elem->getAttribute('version') || $feed->SUPER::version(@_);
 }
 
 sub entries_libxml {

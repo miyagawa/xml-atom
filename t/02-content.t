@@ -50,9 +50,9 @@ ok($content->body, '<p>This is a test with invalid XHTML.');
 ok($content->mode, 'escaped');
 
 $content = XML::Atom::Content->new;
-$content->body("This is a test that should use base64\0.");
+$content->body("This is a test that should use base64\x7f.");
 ok($content->mode, 'base64');
-ok($content->body, "This is a test that should use base64\0.");
+ok($content->body, "This is a test that should use base64\x7f.");
 
 $content = XML::Atom::Content->new;
 $content->body("My name is \xe5\xae\xae\xe5\xb7\x9d.");

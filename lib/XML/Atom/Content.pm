@@ -2,9 +2,10 @@
 
 package XML::Atom::Content;
 use strict;
-
-use XML::Atom;
 use base qw( XML::Atom::ErrorHandler );
+
+use Encode;
+use XML::Atom;
 use XML::Atom::Util qw( set_ns remove_default_ns hack_unicode_entity );
 use MIME::Base64 qw( encode_base64 decode_base64 );
 
@@ -123,15 +124,15 @@ sub body {
                 } else {
                     $content->{__body} = LIBXML ? $elem->textContent : $elem->string_value;
                 }
+                if ($] >= 5.008) {
+                    $content->{__body} = hack_unicode_entity($content->{__body});
+                }
             } elsif ($mode eq 'base64') {
                 $content->{__body} = decode_base64(LIBXML ? $elem->textContent : $elem->string_value);
             } elsif ($mode eq 'escaped') {
                 $content->{__body} = LIBXML ? $elem->textContent : $elem->string_value;
             } else {
                 $content->{__body} = undef;
-            }
-            if ($] >= 5.008) {
-                $content->{__body} = hack_unicode_entity($content->{__body});
             }
         }
     }
@@ -141,8 +142,10 @@ sub body {
 sub _is_printable {
     my $data = shift;
 
-    # printable ASCII or UTF-8 bytes
-    $data =~ /^(?:[\x09\x0a\x0d\x20-\x7f]|[\xc0-\xdf][\x80-\xbf]|[\xe0-\xef][\x80-\xbf][\x80-\xbf])*$/;
+    # try decoding this $data with UTF-8
+    my $decoded;
+    eval { $decoded = Encode::decode("utf-8", $data, Encode::FB_CROAK) };
+    !$@ && $decoded =~ /^\p{IsPrint}*$/;
 }
 
 sub as_xml {

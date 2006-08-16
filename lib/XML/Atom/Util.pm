@@ -11,20 +11,29 @@ use Exporter;
 @ISA = qw( Exporter );
 
 our %NS_MAP = (
-    0.3 => 'http://purl.org/atom/ns#',
-    1.0 => 'http://www.w3.org/2005/Atom',
+    '0.3' => 'http://purl.org/atom/ns#',
+    '1.0' => 'http://www.w3.org/2005/Atom',
 );
+
+our %NS_VERSION = reverse %NS_MAP;
 
 sub set_ns {
     my $thing = shift;
     my($param) = @_;
     if ($param->{Namespace}) {
         $thing->{ns} = $param->{Namespace};
+        $thing->{version} = $NS_VERSION{$param->{Namespace}};
     } else  {
         my $version = $param->{Version} || '0.3';
         my $ns = $NS_MAP{$version} or $thing->error("Unknown version: $version");
         $thing->{ns} = $ns;
+        $thing->{version} = $version;
     }
+}
+
+sub ns_to_version {
+    my $ns = shift;
+    $NS_VERSION{$ns};
 }
 
 sub hack_unicode_entity {

@@ -2,7 +2,13 @@ $Id$
 
 Revision history for XML::Atom
 
-0.13  2005.07.19
+0.12_02
+    - $feed->version now returns 1.0 when xmlns patches with that for 1.0
+    - Fixed segmentation fault problem with <atom:content> longer than 2.5k
+      (Thanks to Chris Dent and Ryan King)
+    - No unicode decode hack on content withou mode="xml"
+
+0.12_01  2005.07.19
     - Added Atom 1.0 feed support for parsing
     - Hacked Unicode entity in $content->body
     - Added $entry->contributor
