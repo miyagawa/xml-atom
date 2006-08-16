@@ -22,7 +22,7 @@ features(
         recommends('XML::LibXML' => 1.54),
     ],
     'Pure perl XML parsing with XML::XPath' => [
-        -default => 1,
+        -default => 0,
         recommends('XML::XPath'),
     ],
     'Client/Server for Atom API' => [
