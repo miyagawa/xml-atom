@@ -39,7 +39,7 @@ sub init {
     $server->{param} = {};
     unless ($ENV{MOD_PERL}) {
         require CGI;
-        $server->{cgi} = CGI->new();
+        $server->{cgi} = CGI->new({});
     }
     $server;
 }
