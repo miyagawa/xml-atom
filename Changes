@@ -2,7 +2,7 @@ $Id$
 
 Revision history for XML::Atom
 
-0.20
+0.20  2006.07.12
     * Lots of refactoring, which simplifies much of the code in the various
       construct modules (Person, Link, etc), and which should also make it
       much more straightforward to add extension classes in the future.

@@ -28,7 +28,7 @@ BEGIN {
 
 use base qw( XML::Atom::ErrorHandler Exporter );
 
-our $VERSION = '0.19_03';
+our $VERSION = '0.20';
 
 package XML::Atom::Namespace;
 use strict;
