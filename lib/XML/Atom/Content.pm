@@ -141,6 +141,7 @@ sub body {
 sub _is_printable {
     my $data = shift;
 
+    local $@;
     # try decoding this $data with UTF-8
     my $decoded =
         ( Encode::is_utf8($data)
