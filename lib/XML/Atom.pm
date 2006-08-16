@@ -25,7 +25,7 @@ BEGIN {
 
 use base qw( XML::Atom::ErrorHandler Exporter );
 
-our $VERSION = '0.19';
+our $VERSION = '0.19_01';
 
 package XML::Atom::Namespace;
 use strict;
@@ -57,7 +57,7 @@ XML::Atom - Atom feed and API implementation
     use XML::Atom;
 
 =head1 DESCRIPTION
-
+n
 Atom is a syndication, API, and archiving format for weblogs and other
 data. I<XML::Atom> implements the feed format as well as a client for the
 API.

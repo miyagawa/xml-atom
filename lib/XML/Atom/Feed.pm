@@ -285,6 +285,28 @@ representing the author. For example:
     $author->email('foo@bar.com');
     $feed->author($author);
 
+=head1 UNICODE FLAGS
+
+By default, XML::Atom takes off all the Unicode flag fro mthe feed content. For example,
+
+  my $title = $feed->title;
+
+the variable C<$title> contains UTF-8 bytes without Unicode flag set,
+even if the feed title contains some multibyte chracters.
+
+If you don't like this behaviour and wants to andle everything as
+Unicode characters (rather than UTF-8 bytes), set
+C<$XML::Atom::ForceUnicode> flag to 1.
+
+  $XML::Atom::ForceUnicode = 1;
+
+then all the data returned from XML::Atom::Feed object and
+XML::Atom::Entry object etc., will have Unicode flag set.
+
+The only exception will be C<< $entry->content->body >>, if content
+type is not text/* (e.g. image/gif). In that case, the content body is
+still binary data, without Unicode flag set.
+
 =head1 AUTHOR & COPYRIGHT
 
 Please see the I<XML::Atom> manpage for author, copyright, and license

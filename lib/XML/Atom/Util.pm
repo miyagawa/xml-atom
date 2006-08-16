@@ -41,7 +41,7 @@ sub hack_unicode_entity {
     my $data = shift;
     Encode::_utf8_on($data);
     $data =~ s/&#x(\w{4});/chr(hex($1))/eg;
-    Encode::_utf8_off($data);
+    Encode::_utf8_off($data) unless $XML::Atom::ForceUnicode;
     $data;
 }
 

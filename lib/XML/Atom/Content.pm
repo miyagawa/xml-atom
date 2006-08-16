@@ -132,11 +132,10 @@ sub body {
                 my $raw = decode_base64(LIBXML ? $elem->textContent : $elem->string_value);
                 if ($content->type && $content->type =~ m!^text/!) {
                     $content->{__body} = eval { Encode::decode("utf-8", $raw) } || $raw;
-                    Encode::_utf8_off($content->{__body});
+                    Encode::_utf8_off($content->{__body}) unless $XML::Atom::ForceUnicode;
                 } else {
                     $content->{__body} = $raw;
                 }
-#                $content->{__body} = Encode::decode("utf-8", $raw);
             } elsif ($mode eq 'escaped') {
                 $content->{__body} = LIBXML ? $elem->textContent : $elem->string_value;
             } else {

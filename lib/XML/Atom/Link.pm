@@ -43,7 +43,7 @@ sub get {
     my $val = $link->elem->getAttribute($attr);
     if ($] >= 5.008) {
         require Encode;
-        Encode::_utf8_off($val);
+        Encode::_utf8_off($val) unless $XML::Atom::ForceUnicode;
     }
     $val;
 }

@@ -119,7 +119,7 @@ sub get {
     my $val = LIBXML ? $node->textContent : $node->string_value;
     if ($] >= 5.008) {
         require Encode;
-        Encode::_utf8_off($val);
+        Encode::_utf8_off($val) unless $XML::Atom::ForceUnicode;
     }
     $val;
 }
@@ -133,7 +133,7 @@ sub getlist {
         my $val = LIBXML ? $_->textContent : $_->string_value;
         if ($] >= 5.008) {
             require Encode;
-            Encode::_utf8_off($val);
+            Encode::_utf8_off($val) unless $XML::Atom::ForceUnicode;
         }
         $val;
      } @node;
@@ -278,7 +278,7 @@ sub as_xml {
     my $xml = $doc->toString(LIBXML ? 1 : 0);
     if ($] > 5.008) {
         require Encode;
-        Encode::_utf8_off($xml);
+        Encode::_utf8_off($xml) unless $XML::Atom::ForceUnicode;
     }
     $xml;
 }

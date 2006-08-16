@@ -2,6 +2,10 @@ $Id$
 
 Revision history for XML::Atom
 
+0.20
+    * Added global $XML::Atom::ForceUnicode flag to return everything as Unicode flagged
+      (Suggested by many people)
+
 0.19  2006.03.19
     * Fix 0.18 bug where renaming stuff was totally broken.
 

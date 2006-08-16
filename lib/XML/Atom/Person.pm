@@ -44,7 +44,7 @@ sub get {
     my $val = LIBXML ? $node->textContent : $node->string_value;
     if ($] >= 5.008) {
         require Encode;
-        Encode::_utf8_off($val);
+        Encode::_utf8_off($val) unless $XML::Atom::ForceUnicode;
     }
     $val;
 }
