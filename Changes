@@ -8,8 +8,8 @@ Revision history for XML::Atom
     - Removed XML::LibXSLT usage. Too much pain for too little gain.
       To be clear: all it was doing was namespace normalization, so
       removing it should make no difference.
-    - Fixed _utf8_off bug in XML::Atom::Client that causes wrong
-      Content-Length value. (Tatsuhiko Miyagawa, Masayoshi Sekimura)
+    - Fixed _utf8_off bug in XML::Atom::Client that causes fatal error
+      in POSTing multibyte content (Tatsuhiko Miyagawa, Masayoshi Sekimura)
     - Added XML::Atom::Thing::add method to allow $entry->add()
       (Tatsuhiko Miyagawa)
 
