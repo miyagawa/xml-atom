@@ -24,9 +24,13 @@ sub content {
     }
 }
 
+__PACKAGE__->mk_elem_accessors(qw( summary source ));
+
 __PACKAGE__->_rename_elements('issued' => 'published');
 __PACKAGE__->_rename_elements('modified' => 'updated');
 
+# OMG 0.3 elements ... to be backward compatible
+__PACKAGE__->mk_elem_accessors(qw( created ));
 
 1;
 __END__

@@ -88,10 +88,16 @@ sub set {
     }
 }
 
+# common elements
+__PACKAGE__->mk_elem_accessors(qw( icon id logo title )); # updated & rights are in renamed
+
+# common multiple elements
 __PACKAGE__->mk_object_list_accessor('link' => 'XML::Atom::Link', 'links');
 __PACKAGE__->mk_object_list_accessor('category' => 'XML::Atom::Category', 'categories');
 __PACKAGE__->mk_object_list_accessor('author' => 'XML::Atom::Person', 'authors');
 __PACKAGE__->mk_object_list_accessor('contributor' => 'XML::Atom::Person', 'contributors');
+
+__PACKAGE__->_rename_elements('copyright' => 'rights');
 
 # 0.3 -> 1.0 elements aliasing
 sub _rename_elements {
@@ -112,18 +118,6 @@ sub _rename_elements {
         }
         @_ > 0 ? $self->set($self->ns, $atom10, @_) : $self->get($self->ns, $atom10);
     };
-}
-
-sub DESTROY { }
-
-use vars qw( $AUTOLOAD );
-sub AUTOLOAD {
-    (my $var = $AUTOLOAD) =~ s!.+::!!;
-    no strict 'refs';
-    *$AUTOLOAD = sub {
-        @_ > 1 ? $_[0]->set($_[0]->ns, $var, @_[1..$#_]) : $_[0]->get($_[0]->ns, $var)
-    };
-    goto &$AUTOLOAD;
 }
 
 1;

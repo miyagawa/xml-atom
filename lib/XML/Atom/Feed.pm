@@ -151,6 +151,8 @@ sub add_entry_xpath {
     }
 }
 
+__PACKAGE__->mk_elem_accessors(qw( generator ));
+
 __PACKAGE__->_rename_elements('modified' => 'updated');
 __PACKAGE__->_rename_elements('tagline' => 'subtitle');
 
