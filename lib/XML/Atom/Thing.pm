@@ -90,6 +90,8 @@ sub set {
 
 __PACKAGE__->mk_object_list_accessor('link' => 'XML::Atom::Link', 'links');
 __PACKAGE__->mk_object_list_accessor('category' => 'XML::Atom::Category', 'categories');
+__PACKAGE__->mk_object_list_accessor('author' => 'XML::Atom::Person', 'authors');
+__PACKAGE__->mk_object_list_accessor('contributor' => 'XML::Atom::Person', 'contributors');
 
 # 0.3 -> 1.0 elements aliasing
 sub _rename_elements {

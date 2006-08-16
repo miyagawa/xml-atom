@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 20;
+use Test::More tests => 23;
 use XML::Atom::Feed;
 
 sub is_deeply_method;
@@ -34,6 +34,11 @@ is $entry->author->email, 'f8dy@example.com';
 
 my @contrib = $entry->contributor;
 is @contrib, 2, "2 contribs";
+is_deeply_method $contrib[0], { name => 'Sam Ruby' };
+is_deeply_method $contrib[1], { name => 'Joe Gregorio' };
+
+@contrib = $entry->contributors;
+is @contrib, 2, "2 contribs (moniker)";
 is_deeply_method $contrib[0], { name => 'Sam Ruby' };
 is_deeply_method $contrib[1], { name => 'Joe Gregorio' };
 
