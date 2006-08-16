@@ -45,5 +45,9 @@ is @categories, 4, "moniker";
     @cat = $entry->categories;
     is @cat, 2;
     is $cat[1]->term, "bar";
+
+    my $xml = $entry->as_xml;
+    like $xml, qr!<category xmlns="http://www.w3.org/2005/Atom" term="foo" scheme="http://example.org/foo#" label="foo bar"/>!;
+    like $xml, qr!<category xmlns="http://www.w3.org/2005/Atom" term="bar" scheme="http://example.org/bar#"/>!;
 }
 
