@@ -11,3 +11,4 @@
 \.tar\.gz$
 21-client.t$
 22-autodiscovery.t$
+\.svn
