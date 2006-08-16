@@ -2,7 +2,7 @@ $Id$
 
 Revision history for XML::Atom
 
-0.12
+0.12  2005.06.07
     - Documentation fixes for XML::Atom::Server. Thanks to Tatsuhiko
       Miyagawa for the patch.
     - Removed XML::LibXSLT usage. Too much pain for too little gain.

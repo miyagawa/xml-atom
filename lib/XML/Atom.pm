@@ -25,7 +25,7 @@ BEGIN {
 
 use base qw( XML::Atom::ErrorHandler Exporter );
 
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 
 package XML::Atom::Namespace;
 use strict;
@@ -69,7 +69,11 @@ under the same terms as Perl itself.
 
 =head1 AUTHOR & COPYRIGHT
 
-Except where otherwise noted, I<XML::Atom> is Copyright 2003 Benjamin
-Trott, cpan@stupidfool.org. All rights reserved.
+Except where otherwise noted, I<XML::Atom> is Copyright 2003-2005
+Benjamin Trott, cpan@stupidfool.org. All rights reserved.
+
+=head1 CO-MAINTAINER
+
+Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt>
 
 =cut
