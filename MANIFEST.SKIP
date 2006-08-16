@@ -12,3 +12,6 @@
 21-client.t$
 22-autodiscovery.t$
 \.svn
+\.rej$
+\.tar$
+\.orig$

@@ -70,11 +70,11 @@ sub body {
             $elem->removeChild($_) for $elem->getChildNodes;
         }
         if (!_is_printable($data)) {
-            my $raw = Encode::encode("utf-8", $data);
+            Encode::_utf8_off($data);
             if (LIBXML) {
-               $elem->appendChild(XML::LibXML::Text->new(encode_base64($raw, '')));
+               $elem->appendChild(XML::LibXML::Text->new(encode_base64($data, '')));
             } else {
-               $elem->appendChild(XML::XPath::Node::Text->new(encode_base64($raw, '')));
+               $elem->appendChild(XML::XPath::Node::Text->new(encode_base64($data, '')));
             }
             $elem->setAttribute('mode', 'base64');
         } else {

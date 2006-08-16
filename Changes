@@ -2,6 +2,9 @@ $Id$
 
 Revision history for XML::Atom
 
+0.16  2005.11.22
+    * Fixed a terrible bug when you set binary data to $entry->content
+
 0.15  2005.11.01
     - Fixed bug found in mode => 'insert'
       (Thanks to Dominic Mitchell)
