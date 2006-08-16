@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 69;
+use Test::More tests => 71;
 use XML::Atom;
 use XML::Atom::Entry;
 use XML::Atom::Person;
@@ -53,6 +53,11 @@ is $link[1]->rel, 'service.edit';
 is $link[1]->type, 'application/x.atom+xml';
 is $link[1]->href, 'http://www.example.com/atom/entry_id=75207';
 is $link[1]->title, 'Edit';
+
+my @links = $entry->links;
+is scalar(@links), 2;
+is $links[0]->rel, 'alternate';
+
 
 my $link = $entry->link;
 isa_ok $link, 'XML::Atom::Link';

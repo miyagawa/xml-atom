@@ -2,10 +2,12 @@
 
 package XML::Atom::Base;
 use strict;
-use base qw( XML::Atom::ErrorHandler );
+use base qw( XML::Atom::ErrorHandler Class::Data::Inheritable );
 
 use XML::Atom;
 use XML::Atom::Util qw( set_ns first nodelist childlist create_element remove_default_ns );
+
+__PACKAGE__->mk_classdata('__attributes', []);
 
 sub new {
     my $class = shift;
@@ -188,7 +190,18 @@ sub mk_attr_accessors {
                 return $obj->get_attr($attr);
             }
         };
+        $class->_add_attribute($attr);
     }
+}
+
+sub _add_attribute {
+    my($class, $attr) = @_;
+    push @{$class->__attributes}, $attr;
+}
+
+sub attributes {
+    my $class = shift;
+    @{ $class->__attributes };
 }
 
 sub mk_object_accessor {
@@ -203,6 +216,67 @@ sub mk_object_accessor {
             return $obj->set($ns_uri, $name, $_[0]);
         } else {
             return $obj->get_object($ns_uri, $name, $ext_class);
+        }
+    };
+}
+
+
+sub mk_object_list_accessor {
+    my $class = shift;
+    my($name, $ext_class, $moniker) = @_;
+
+    no strict 'refs';
+
+    *{"$class\::$name"} = sub {
+        my $obj = shift;
+
+        my $ns_uri = $ext_class->element_ns || $obj->ns;
+        if (@_) {
+            # setter: clear existent elements first
+            my @elem = childlist($obj->elem, $ns_uri, $name);
+            for my $el (@elem) {
+                $obj->elem->removeChild($el);
+            }
+
+            # add the new elements for each
+            my $adder = "add_$name";
+            for my $add_elem (@_) {
+                $obj->$adder($add_elem);
+            }
+        } else {
+            # getter: just call get_object which is a context aware
+            return $obj->get_object($ns_uri, $name, $ext_class);
+        }
+    };
+
+    # moniker returns always list: array ref in a scalar context
+    if ($moniker) {
+        *{"$class\::$moniker"} = sub {
+            my $obj = shift;
+            if (@_) {
+                return $obj->$name(@_);
+            } else {
+                my @obj = $obj->$name;
+                return wantarray ? @obj : \@obj;
+            }
+        };
+    }
+
+    # add_$name
+    *{"$class\::add_$name"} = sub {
+        my $obj = shift;
+        my($stuff) = @_;
+
+        my $ns_uri = $ext_class->element_ns || $obj->ns;
+        my $elem = ref $stuff eq $ext_class ?
+            $stuff->elem : create_element($ns_uri, $name);
+        $obj->elem->appendChild($elem);
+
+        if (ref($stuff) eq 'HASH') {
+            for my $k ( $ext_class->attributes ) {
+                defined $stuff->{$k} or next;
+                $elem->setAttribute($k, $stuff->{$k});
+            }
         }
     };
 }

@@ -14,6 +14,7 @@ include('ExtUtils::AutoInstall');
 
 requires('MIME::Base64');
 requires('URI');
+requires('Class::Data::Inheritable');
 
 features(
     'Faster XML parsing with libxml' => [
