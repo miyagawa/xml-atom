@@ -70,10 +70,11 @@ sub body {
             $elem->removeChild($_) for $elem->getChildNodes;
         }
         if (!_is_printable($data)) {
+            my $raw = Encode::encode("utf-8", $data);
             if (LIBXML) {
-               $elem->appendChild(XML::LibXML::Text->new(encode_base64($data, '')));
+               $elem->appendChild(XML::LibXML::Text->new(encode_base64($raw, '')));
             } else {
-               $elem->appendChild(XML::XPath::Node::Text->new(encode_base64($data, '')));
+               $elem->appendChild(XML::XPath::Node::Text->new(encode_base64($raw, '')));
             }
             $elem->setAttribute('mode', 'base64');
         } else {
@@ -128,7 +129,8 @@ sub body {
                     $content->{__body} = hack_unicode_entity($content->{__body});
                 }
             } elsif ($mode eq 'base64') {
-                $content->{__body} = decode_base64(LIBXML ? $elem->textContent : $elem->string_value);
+                my $raw = decode_base64(LIBXML ? $elem->textContent : $elem->string_value);
+                $content->{__body} = Encode::decode("utf-8", $raw);
             } elsif ($mode eq 'escaped') {
                 $content->{__body} = LIBXML ? $elem->textContent : $elem->string_value;
             } else {
@@ -143,9 +145,12 @@ sub _is_printable {
     my $data = shift;
 
     # try decoding this $data with UTF-8
-    my $decoded;
-    eval { $decoded = Encode::decode("utf-8", $data, Encode::FB_CROAK) };
-    !$@ && $decoded =~ /^\p{IsPrint}*$/;
+    my $decoded =
+        ( Encode::is_utf8($data)
+          ? $data
+          : eval { Encode::decode("utf-8", $data, Encode::FB_CROAK) } );
+
+    return ! $@ && $decoded =~ /^\p{IsPrint}*$/;
 }
 
 sub as_xml {

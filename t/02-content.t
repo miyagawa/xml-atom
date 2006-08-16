@@ -5,7 +5,7 @@ use strict;
 use Test;
 use XML::Atom::Content;
 
-BEGIN { plan tests => 24 };
+BEGIN { plan tests => 26 };
 
 my $content;
 
@@ -58,3 +58,8 @@ $content = XML::Atom::Content->new;
 $content->body("My name is \xe5\xae\xae\xe5\xb7\x9d.");
 ok($content->mode, 'xml');
 ok($content->body, "My name is \xe5\xae\xae\xe5\xb7\x9d.");
+
+$content = XML::Atom::Content->new;
+eval { $content->body("Non-printable: " . chr(578)) };
+ok($content->mode, 'base64');
+ok($content->body, "Non-printable: " . chr(578));
