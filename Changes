@@ -2,6 +2,9 @@ $Id$
 
 Revision history for XML::Atom
 
+0.19  2006.03.19
+    * Fix 0.18 bug where renaming stuff was totally broken.
+
 0.18  2006.03.16
     * Support Atom 0.3 -> 1.0 renaming bits (issued -> published,
       modified -> updated, tagline -> subtitle)

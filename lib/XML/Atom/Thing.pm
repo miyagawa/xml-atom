@@ -335,7 +335,7 @@ sub _rename_elements {
         if ($self->version eq "1.0") {
             return $self->$atom10(@_);
         }
-        @_ > 1 ? $self->set($self->ns, $atom03, @_) : $self->get($self->ns, $atom03);
+        @_ > 0 ? $self->set($self->ns, $atom03, @_) : $self->get($self->ns, $atom03);
     };
 
     *{"$class\::$atom10"} = sub {
@@ -343,7 +343,7 @@ sub _rename_elements {
         if ($self->version eq "0.3") {
             return $self->$atom03(@_);
         }
-        @_ > 1 ? $self->set($self->ns, $atom10, @_) : $self->get($self->ns, $atom10);
+        @_ > 0 ? $self->set($self->ns, $atom10, @_) : $self->get($self->ns, $atom10);
     };
 }
 
