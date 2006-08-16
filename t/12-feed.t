@@ -6,7 +6,7 @@ use Test;
 use XML::Atom::Feed;
 use URI;
 
-BEGIN { plan tests => 30 };
+BEGIN { plan tests => 31 };
 
 my $feed;
 
@@ -70,3 +70,4 @@ $feed->add_entry($entry, { mode => 'insert' });
 
 ok(scalar @entries, 17);
 ok($entries[0]->title, 'Bar');
+ok( $feed->title, 'dive into atom' );

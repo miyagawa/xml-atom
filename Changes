@@ -2,6 +2,10 @@ $Id$
 
 Revision history for XML::Atom
 
+0.15  2005.11.01
+    - Fixed bug found in mode => 'insert'
+      (Thanks to Dominic Mitchell)
+
 0.14  2005.10.21
     - Fixed bug that it decodes binary data as UTF-8 octet
       (Thanks to Mahlon E. Smith)

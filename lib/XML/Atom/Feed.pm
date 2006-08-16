@@ -125,10 +125,16 @@ sub add_entry_libxml {
     my $feed = shift;
     my($entry, $opt) = @_;
     $opt ||= {};
-    if ($opt->{mode} && $opt->{mode} eq 'insert') {
+    # When doing an insert, we try to insert before the first <entry> so
+    # that we don't screw up any preamble.  If there are no existing
+    # <entry>'s, then fall back to appending, which should be
+    # semantically identical.
+    my ($first_entry) =
+        $feed->{doc}->getDocumentElement->getChildrenByTagNameNS($entry->ns, 'entry');
+    if ($opt->{mode} && $opt->{mode} eq 'insert' && $first_entry) {
         $feed->{doc}->getDocumentElement->insertBefore(
             $entry->{doc}->getDocumentElement,
-            $feed->{doc}->getDocumentElement->firstChild,
+            $first_entry,
         );
     } else {
         $feed->{doc}->getDocumentElement->appendChild(
@@ -141,8 +147,10 @@ sub add_entry_xpath {
     my $feed = shift;
     my($entry, $opt) = @_;
     $opt ||= {};
-    if ($opt->{mode} && $opt->{mode} eq 'insert') {
-        $feed->{doc}->insertBefore($entry->{doc}, $feed->{doc}->getFirstChild);
+    my $set = $feed->{doc}->find("*[local-name()='entry' and namespace-uri()='" . $entry->ns . "']");
+    my $first_entry = $set ? ($set->get_nodelist)[0] : undef;
+    if ($opt->{mode} && $opt->{mode} eq 'insert' && $first_entry) {
+        $feed->{doc}->insertBefore($entry->{doc}, $first_entry);
     } else {
         $feed->{doc}->appendChild($entry->{doc});
     }
