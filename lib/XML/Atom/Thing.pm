@@ -183,21 +183,24 @@ sub add_link {
     my $thing = shift;
     my($link) = @_;
     my $elem;
-    if (LIBXML) {
-        $elem = $thing->{doc}->createElementNS(NS, 'link');
-        $thing->{doc}->getDocumentElement->appendChild($elem);
-    } else {
-        $elem = XML::XPath::Node::Element->new('link');
-        my $ns = XML::XPath::Node::Namespace->new('#default' => NS);
-        $elem->appendNamespace($ns);
-        $thing->{doc}->appendChild($elem);
-    }
     if (ref($link) eq 'XML::Atom::Link') {
-        for my $k (qw( type rel href title )) {
-            my $v = $link->$k() or next;
-            $elem->setAttribute($k, $v);
-        }
-    } elsif (ref($link) eq 'HASH') {
+	if (LIBXML) {
+	    $thing->{doc}->getDocumentElement->appendChild($link->elem);
+	} else {
+	    $thing->{doc}->appendChild($link->elem);
+	}
+    } else {
+	if (LIBXML) {
+	    $elem = $thing->{doc}->createElementNS(NS, 'link');
+	    $thing->{doc}->getDocumentElement->appendChild($elem);
+	} else {
+	    $elem = XML::XPath::Node::Element->new('link');
+	    my $ns = XML::XPath::Node::Namespace->new('#default' => NS);
+	    $elem->appendNamespace($ns);
+	    $thing->{doc}->appendChild($elem);
+	}
+    }
+    if (ref($link) eq 'HASH') {
         for my $k (qw( type rel href title )) {
             my $v = $link->{$k} or next;
             $elem->setAttribute($k, $v);

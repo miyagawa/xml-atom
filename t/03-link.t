@@ -1,11 +1,11 @@
-# $Id: 03-link.t,v 1.4 2004/05/09 10:49:02 btrott Exp $
+# $Id$
 
 use strict;
 
 use Test;
 use XML::Atom::Link;
 
-BEGIN { plan tests => 13 };
+BEGIN { plan tests => 14 };
 
 my $link;
 
@@ -35,3 +35,10 @@ ok($xml =~ /title="This is a test."/);
 ok($xml =~ /rel="alternate"/);
 ok($xml =~ m!href="http://www.example.com/"!);
 ok($xml =~ m!type="text/html"!);
+
+my $ns = XML::Atom::Namespace->new(dc => "http://purl.org/dc/elements/1.1/");
+$link->set($ns, "subject" => "blah");
+
+$xml = $link->as_xml;
+ok($xml =~ m!dc:subject="blah"!);
+

@@ -11,6 +11,11 @@ Revision history for XML::Atom
     - Added XML::Atom::Entry::getlist($ns, $element) to retrieve the values
       of an element that may appear multiple times in the entry (like
       dc:subject). Thanks to Tatsuhiko Miyagawa for the patch.
+    - Added ability to set namespaced attributes in an XML::Atom::Link
+      object. Thanks to Tatsuhiko Miyagawa for the patch.
+    - XML::Atom::Entry::add_link($link) no longer clones $link if it's
+      a XML::Atom::Link object. Thanks to Tatsuhiko Miyagawa for the
+      patch.
 
 0.10  2004.12.31
     - Eliminated unitialized value warning on <link /> attributes that

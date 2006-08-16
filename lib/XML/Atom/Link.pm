@@ -1,4 +1,4 @@
-# $Id: Link.pm,v 1.4 2004/05/08 18:33:46 btrott Exp $
+# $Id$
 
 package XML::Atom::Link;
 use strict;
@@ -49,8 +49,20 @@ sub get {
 
 sub set {
     my $link = shift;
-    my($attr, $val) = @_;
-    $link->elem->setAttribute($attr, $val);
+    if (@_ == 2) {
+	my($attr, $val) = @_;
+	$link->elem->setAttribute($attr, $val);
+    } elsif (@_ == 3) {
+	my($ns, $attr, $val) = @_;
+	my $attribute = "$ns->{prefix}:$attr";
+	if (LIBXML) {
+	    $link->elem->setAttributeNS($ns->{uri}, $attribute, $val);
+	} else {
+	    my $ns = XML::XPath::Node::Namespace->new($ns->{prefix} => $ns->{uri});
+            $link->elem->appendNamespace($ns);
+	    $link->elem->setAttribute($attribute => $val);
+	}
+    }
 }
 
 sub as_xml {

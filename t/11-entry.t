@@ -7,7 +7,7 @@ use XML::Atom;
 use XML::Atom::Entry;
 use XML::Atom::Person;
 
-BEGIN { plan tests => 63 }
+BEGIN { plan tests => 64 }
 
 my $entry;
 
@@ -128,3 +128,9 @@ $entry = XML::Atom::Entry->new( Stream => \$entry->as_xml );
 ok($entry->content->mode, 'base64');
 ok($entry->content->body, "This is a test that should use base64\0.");
 ok($entry->content->type, 'image/gif');
+
+my $ns = XML::Atom::Namespace->new(list => "http://www.sixapart.com/atom/list#");
+$link->set($ns, type => "Books");
+$entry->add_link($link);
+$xml = $entry->as_xml;
+ok($xml =~ /list:type="Books"/);
