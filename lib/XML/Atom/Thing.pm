@@ -245,26 +245,8 @@ sub author {
 
 sub as_xml {
     my $doc = $_[0]->{doc};
-    if (eval { require XML::LibXSLT }) {
-        my $parser = XML::LibXML->new;
-        my $xslt = XML::LibXSLT->new;
-        my $style_doc = $parser->parse_string(<<'EOX');
-<?xml version="1.0"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  <xsl:template match="@*|node()">
-    <xsl:copy>
-      <xsl:apply-templates select="@*|node()"/>
-    </xsl:copy>
-  </xsl:template>
-</xsl:stylesheet> 
-EOX
-        my $sheet = $xslt->parse_stylesheet($style_doc);
-        my $results = $sheet->transform($doc);
-        return $sheet->output_string($results);
-    } else {
-        remove_default_ns($doc->getDocumentElement);
-        return $doc->toString(LIBXML ? 1 : 0);
-    }
+    remove_default_ns($doc->getDocumentElement);
+    $doc->toString(LIBXML ? 1 : 0);
 }
 
 sub _element {

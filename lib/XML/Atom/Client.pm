@@ -1,4 +1,4 @@
-# $Id: Client.pm,v 1.23 2004/07/29 16:51:25 btrott Exp $
+# $Id$
 
 package XML::Atom::Client;
 use strict;
@@ -127,6 +127,7 @@ sub make_request {
     $client->munge_request($req);
     my $res = $client->{ua}->request($req);
     $client->munge_response($res);
+    $client->{response} = $res;
     $res;
 }
 

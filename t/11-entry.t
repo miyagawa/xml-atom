@@ -134,3 +134,16 @@ $link->set($ns, type => "Books");
 $entry->add_link($link);
 $xml = $entry->as_xml;
 ok($xml =~ /list:type="Books"/);
+
+$entry->set($dc, "subject" => "Weblog");
+
+ok($entry->as_xml =~ m!<subject .*>Weblog</subject>!);
+
+$entry->add($dc, "subject" => "Tech");
+ok($entry->as_xml =~ m!<subject .*>Weblog</subject>!);
+ok($entry->as_xml =~ m!<subject .*>Tech</subject>!);
+
+# re-set
+$entry->set($dc, "subject" => "Weblog");
+ok($entry->as_xml =~ m!<subject .*>Weblog</subject>!);
+ok($entry->as_xml !~ m!<subject .*>Tech</subject>!);
