@@ -210,10 +210,9 @@ sub munge_response {
 sub make_nonce { sha1(sha1(time() . {} . rand() . $$)) }
 
 sub _utf8_off {
-    my $val = shift;
     if ($] >= 5.008) {
         require Encode;
-        Encode::_utf8_off($val);
+        Encode::_utf8_off($_[0]);
     }
 }
 

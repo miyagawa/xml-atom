@@ -7,7 +7,7 @@ use XML::Atom;
 use XML::Atom::Entry;
 use XML::Atom::Person;
 
-BEGIN { plan tests => 64 }
+BEGIN { plan tests => 69 }
 
 my $entry;
 

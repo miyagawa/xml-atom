@@ -124,15 +124,23 @@ sub getlist {
      } @node;
 }
 
-sub set_libxml {
+sub add {
     my $atom = shift;
     my($ns, $name, $val, $attr) = @_;
-    my $elem;
+    $atom->set($ns, $name, $val, $attr, 1);
+}
+
+sub set_libxml {
+    my $atom = shift;
+    my($ns, $name, $val, $attr, $add) = @_;
     my $ns_uri = ref($ns) eq 'XML::Atom::Namespace' ? $ns->{uri} : $ns;
-    unless ($elem = first($atom->{doc}, $ns_uri, $name)) {
-        $elem = $atom->{doc}->createElementNS($ns_uri, $name);
-        $atom->{doc}->getDocumentElement->appendChild($elem);
+    my @elem = nodelist($atom->{doc}, $ns_uri, $name);
+    if (!$add && @elem) {
+        my $doc = $atom->{doc}->getDocumentElement;
+        $doc->removeChild($_) for @elem;
     }
+    my $elem = $atom->{doc}->createElementNS($ns_uri, $name);
+    $atom->{doc}->getDocumentElement->appendChild($elem);
     if ($ns ne NS) {
         $atom->{doc}->getDocumentElement->setNamespace($ns->{uri}, $ns->{prefix}, 0);
     }
@@ -153,17 +161,18 @@ sub set_libxml {
 
 sub set_xpath {
     my $atom = shift;
-    my($ns, $name, $val, $attr) = @_;
-    my $elem;
+    my($ns, $name, $val, $attr, $add) = @_;
     my $ns_uri = ref($ns) eq 'XML::Atom::Namespace' ? $ns->{uri} : $ns;
-    unless ($elem = first($atom->{doc}, $ns_uri, $name)) {
-        $elem = XML::XPath::Node::Element->new($name);
-        if ($ns ne NS) {
-            my $ns = XML::XPath::Node::Namespace->new($ns->{prefix} => $ns->{uri});
-            $elem->appendNamespace($ns);
-        }
-        $atom->{doc}->appendChild($elem);
+    my @elem = nodelist($atom->{doc}, $ns_uri, $name);
+    if (!$add && @elem) {
+        $atom->{doc}->removeChild($_) for @elem;
     }
+    my $elem = XML::XPath::Node::Element->new($name);
+    if ($ns ne NS) {
+        my $ns = XML::XPath::Node::Namespace->new($ns->{prefix} => $ns->{uri});
+        $elem->appendNamespace($ns);
+    }
+    $atom->{doc}->appendChild($elem);
     if (ref($val) =~ /Element$/) {
         $elem->appendChild($val);
     } elsif (defined $val) {
