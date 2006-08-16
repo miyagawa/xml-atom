@@ -7,7 +7,7 @@ use XML::Atom::Client;
 use XML::Atom::Entry;
 
 unless ($ENV{DO_ATOMAPI_TEST}) {
-    plan skip_all => "Don't skip Atom test";
+    plan skip_all => "Don't do live Atom test";
 }
 
 plan tests => 22;
