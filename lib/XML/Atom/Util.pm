@@ -7,7 +7,7 @@ use XML::Atom;
 use vars qw( @EXPORT_OK @ISA );
 use Encode;
 use Exporter;
-@EXPORT_OK = qw( set_ns hack_unicode_entity first nodelist textValue iso2dt encode_xml remove_default_ns );
+@EXPORT_OK = qw( set_ns hack_unicode_entity first nodelist childlist textValue iso2dt encode_xml remove_default_ns create_element );
 @ISA = qw( Exporter );
 
 our %NS_MAP = (
@@ -64,6 +64,19 @@ sub nodelist {
     }
 }
 
+sub childlist {
+    if (LIBXML) {
+        return  $_[1] ? $_[0]->getChildrenByTagNameNS($_[1], $_[2]) :
+                $_[0]->getChildrenByTagName($_[2]);
+    } else {
+        my $set = $_[1] ?
+            $_[0]->find("*[local-name()='$_[2]' and namespace-uri()='$_[1]']") :
+            $_[0]->find($_[2]);
+        return unless $set && $set->isa('XML::XPath::NodeSet');
+        return $set->get_nodelist;
+    }
+}
+
 sub textValue {
     my $node = first(@_) or return;
     LIBXML ? $node->textContent : $node->string_value;
@@ -108,6 +121,28 @@ sub remove_default_ns {
     for my $n ($node->childNodes) {
         remove_default_ns($n);
     }
+}
+
+sub create_element {
+    my($ns, $name) = @_;
+    my($ns_uri, $ns_prefix);
+    if (ref $ns eq 'XML::Atom::Namespace') {
+        $ns_uri = $ns->{uri};
+        $ns_prefix = $ns->{prefix};
+    } else {
+        $ns_uri = $ns;
+    }
+    my $elem;
+    if (LIBXML) {
+        $elem = XML::LibXML::Element->new($name);
+        $elem->setNamespace($ns_uri, $ns_prefix ? $ns_prefix : ());
+    } else {
+        $ns_prefix ||= '#default';
+        $elem = XML::XPath::Node::Element->new($name);
+        my $ns = XML::XPath::Node::Namespace->new($ns_prefix => $ns_uri);
+        $elem->appendNamespace($ns);
+    }
+    return $elem;
 }
 
 1;

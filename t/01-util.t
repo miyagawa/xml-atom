@@ -1,16 +1,16 @@
-# $Id: 01-util.t,v 1.4 2003/09/28 21:12:32 btrott Exp $
+# $Id$
 
 use strict;
 
-use Test;
+use Test::More;
 use XML::Atom::Util qw( iso2dt );
 
 BEGIN {
     unless (eval { require DateTime; }) {
-        print "1..0\n";
-        exit;
+        plan skip_all => 'DateTime is required for tests';
+    } else {
+        plan tests => 12;
     }
-    plan tests => 12;
 }
 
 my %tests = (
@@ -29,7 +29,7 @@ my %tests = (
 );
 
 for my $test (keys %tests) {
-    ok(iso2ts($test), $tests{$test});
+    is iso2ts($test), $tests{$test};
 }
 
 sub iso2ts { iso2dt($_[0])->iso8601 }

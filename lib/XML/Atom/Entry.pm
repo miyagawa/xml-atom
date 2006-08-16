@@ -14,11 +14,14 @@ sub element_name { 'entry' }
 
 sub content {
     my $entry = shift;
-    my @arg = @_;
-    if (@arg && ref($arg[0]) ne 'XML::Atom::Content') {
-        $arg[0] = XML::Atom::Content->new($arg[0]);
+    if (my @arg = @_) {
+        if (ref($arg[0]) ne 'XML::Atom::Content') {
+            $arg[0] = XML::Atom::Content->new($arg[0]);
+        }
+        $entry->set($entry->ns, 'content', @arg);
+    } else {
+        return $entry->get_object($entry->ns, 'content', 'XML::Atom::Content');
     }
-    $entry->_element('XML::Atom::Content', 'content', @arg);
 }
 
 __PACKAGE__->_rename_elements('issued' => 'published');

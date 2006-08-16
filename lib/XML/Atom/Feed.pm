@@ -1,10 +1,10 @@
-# $Id: Feed.pm,v 1.8 2004/09/06 12:28:12 btrott Exp $
+# $Id$
 
 package XML::Atom::Feed;
 use strict;
+use base qw( XML::Atom::Thing );
 
 use XML::Atom;
-use base qw( XML::Atom::Thing );
 use XML::Atom::Entry;
 BEGIN {
     if (LIBXML) {
@@ -71,7 +71,7 @@ sub element_name { 'feed' }
 sub language {
     my $feed = shift;
     if (LIBXML) {
-        my $elem = $feed->{doc}->getDocumentElement;
+        my $elem = $feed->elem;
         if (@_) {
             $elem->setAttributeNS('http://www.w3.org/XML/1998/namespace',
                 'lang', $_[0]);
@@ -79,15 +79,15 @@ sub language {
         return $elem->getAttribute('lang');
     } else {
         if (@_) {
-            $feed->{doc}->setAttribute('xml:lang', $_[0]);
+            $feed->elem->setAttribute('xml:lang', $_[0]);
         }
-        return $feed->{doc}->getAttribute('xml:lang');
+        return $feed->elem->getAttribute('xml:lang');
     }
 }
 
 sub version {
     my $feed = shift;
-    my $elem = LIBXML ? $feed->{doc}->getDocumentElement : $feed->{doc};
+    my $elem = $feed->elem;
     if (@_) {
         $elem->setAttribute('version', $_[0]);
     }
@@ -96,7 +96,7 @@ sub version {
 
 sub entries_libxml {
     my $feed = shift;
-    my @res = $feed->{doc}->getElementsByTagNameNS($feed->ns, 'entry') or return;
+    my @res = $feed->elem->getElementsByTagNameNS($feed->ns, 'entry') or return;
     my @entries;
     for my $res (@res) {
         my $entry = XML::Atom::Entry->new(Elem => $res->cloneNode(1));
@@ -107,7 +107,7 @@ sub entries_libxml {
 
 sub entries_xpath {
     my $feed = shift;
-    my $set = $feed->{doc}->find("descendant-or-self::*[local-name()='entry' and namespace-uri()='" . $feed->ns . "']");
+    my $set = $feed->elem->find("descendant-or-self::*[local-name()='entry' and namespace-uri()='" . $feed->ns . "']");
     my @entries;
     for my $elem ($set->get_nodelist) {
         ## Delete the link to the parent (feed) element, and append
@@ -130,16 +130,11 @@ sub add_entry_libxml {
     # <entry>'s, then fall back to appending, which should be
     # semantically identical.
     my ($first_entry) =
-        $feed->{doc}->getDocumentElement->getChildrenByTagNameNS($entry->ns, 'entry');
+        $feed->elem->getChildrenByTagNameNS($entry->ns, 'entry');
     if ($opt->{mode} && $opt->{mode} eq 'insert' && $first_entry) {
-        $feed->{doc}->getDocumentElement->insertBefore(
-            $entry->{doc}->getDocumentElement,
-            $first_entry,
-        );
+        $feed->elem->insertBefore($entry->elem, $first_entry);
     } else {
-        $feed->{doc}->getDocumentElement->appendChild(
-            $entry->{doc}->getDocumentElement,
-        );
+        $feed->elem->appendChild($entry->elem);
     }
 }
 
@@ -147,12 +142,12 @@ sub add_entry_xpath {
     my $feed = shift;
     my($entry, $opt) = @_;
     $opt ||= {};
-    my $set = $feed->{doc}->find("*[local-name()='entry' and namespace-uri()='" . $entry->ns . "']");
+    my $set = $feed->elem->find("*[local-name()='entry' and namespace-uri()='" . $entry->ns . "']");
     my $first_entry = $set ? ($set->get_nodelist)[0] : undef;
     if ($opt->{mode} && $opt->{mode} eq 'insert' && $first_entry) {
-        $feed->{doc}->insertBefore($entry->{doc}, $first_entry);
+        $feed->elem->insertBefore($entry->elem, $first_entry);
     } else {
-        $feed->{doc}->appendChild($entry->{doc});
+        $feed->elem->appendChild($entry->elem);
     }
 }
 

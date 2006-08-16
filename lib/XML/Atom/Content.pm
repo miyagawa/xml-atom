@@ -2,62 +2,29 @@
 
 package XML::Atom::Content;
 use strict;
-use base qw( XML::Atom::ErrorHandler );
+use base qw( XML::Atom::Base );
+
+__PACKAGE__->mk_attr_accessors(qw( type mode lang base ));
 
 use Encode;
 use XML::Atom;
-use XML::Atom::Util qw( set_ns remove_default_ns hack_unicode_entity );
+use XML::Atom::Util qw( remove_default_ns hack_unicode_entity );
 use MIME::Base64 qw( encode_base64 decode_base64 );
 
-sub new {
-    my $class = shift;
-    my $content = bless {}, $class;
-    $content->init(@_) or return $class->error($content->errstr);
-    $content;
-}
+sub element_name { 'content' }
 
 sub init {
     my $content = shift;
     my %param = @_ == 1 ? (Body => $_[0]) : @_;
-    $content->set_ns(\%param);
-    my $elem;
-    unless ($elem = $param{Elem}) {
-        if (LIBXML) {
-            my $doc = XML::LibXML::Document->createDocument('1.0', 'utf-8');
-            $elem = $doc->createElementNS($content->ns, 'content');
-            $doc->setDocumentElement($elem);
-        } else {
-            $elem = XML::XPath::Node::Element->new('content');
-        }
-    }
-    $content->{elem} = $elem;
+    $content->SUPER::init(%param);
     if ($param{Body}) {
         $content->body($param{Body});
     }
     if ($param{Type}) {
         $content->type($param{Type});
     }
-    $content;
+    return $content;
 }
-
-sub ns   { $_[0]->{ns} }
-sub elem { $_[0]->{elem} }
-
-sub type {
-    my $content = shift;
-    if (@_) {
-        $content->elem->setAttribute('type', shift);
-    }
-    $content->elem->getAttribute('type');
-}
-
-sub mode {
-    my $content = shift;
-    $content->elem->getAttribute('mode');
-}
-
-sub lang { $_[0]->elem->getAttribute('lang') }
-sub base { $_[0]->elem->getAttribute('base') }
 
 sub body {
     my $content = shift;
@@ -76,7 +43,7 @@ sub body {
             } else {
                $elem->appendChild(XML::XPath::Node::Text->new(encode_base64($data, '')));
             }
-            $elem->setAttribute('mode', 'base64');
+            $content->mode('base64');
         } else {
             my $copy = '<div xmlns="http://www.w3.org/1999/xhtml">' .
                        $data .
@@ -95,19 +62,19 @@ sub body {
             };
             if (!$@ && $node) {
                 $elem->appendChild($node);
-                $elem->setAttribute('mode', 'xml');
+                $content->mode('xml');
             } else {
                 if (LIBXML) {
                     $elem->appendChild(XML::LibXML::Text->new($data));
                 } else {
                     $elem->appendChild(XML::XPath::Node::Text->new($data));
                 }
-                $elem->setAttribute('mode', 'escaped');
+                $content->mode('escaped');
             }
         }
     } else {
         unless (exists $content->{__body}) {
-            my $mode = $elem->getAttribute('mode') || 'xml';
+            my $mode = $content->mode || 'xml';
             if ($mode eq 'xml') {
                 my @children = grep ref($_) =~ /Element/,
                     LIBXML ? $elem->childNodes : $elem->getChildNodes;
@@ -156,17 +123,6 @@ sub _is_printable {
           : eval { Encode::decode("utf-8", $data, Encode::FB_CROAK) } );
 
     return ! $@ && $decoded =~ /^\p{IsPrint}*$/;
-}
-
-sub as_xml {
-    my $content = shift;
-    if (LIBXML) {
-        my $doc = XML::LibXML::Document->new('1.0', 'utf-8');
-        $doc->setDocumentElement($content->elem);
-        return $doc->toString(1);
-    } else {
-        return $content->elem->toString;
-    }
 }
 
 1;
