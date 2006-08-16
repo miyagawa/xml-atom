@@ -28,6 +28,7 @@ sub init {
     my %param = @_;
     $client->{ua} = LWP::UserAgent::AtomClient->new($client);
     $client->{ua}->agent('XML::Atom/' . XML::Atom->VERSION);
+    $client->{ua}->parse_head(0);
     $client;
 }
 
