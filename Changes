@@ -2,6 +2,13 @@ $Id$
 
 Revision history for XML::Atom
 
+0.22
+    * Refactored internal element accessors by eating the new dog food
+      mk_elem_accessors and mk_object_list_accessor.
+    * Added support of Atom 1.0 <category> parse and generation
+    * Added $thing->links and $thing->categories as a moniker method
+      that returns an array reference in a scalar context
+
 0.21  2006.07.13
     * propagate $entry's version when we create content element off of entry
       using $entry->content("foo") syntax.

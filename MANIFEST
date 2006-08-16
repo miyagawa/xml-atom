@@ -15,6 +15,7 @@ inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 lib/XML/Atom.pm
 lib/XML/Atom/Base.pm
+lib/XML/Atom/Category.pm
 lib/XML/Atom/Client.pm
 lib/XML/Atom/Content.pm
 lib/XML/Atom/Entry.pm
@@ -44,6 +45,7 @@ t/17-renames.t
 t/18-unicode.t
 t/19-ext.t
 t/20-content-xhtml.t
+t/23-category.t
 t/samples/atom-1.0.xml
 t/samples/entry-euc.xml
 t/samples/entry-full.xml
@@ -52,4 +54,5 @@ t/samples/entry-utf8.xml
 t/samples/feed.xml
 t/samples/lifeblog-atom.xml
 t/samples/me.jpg
+t/samples/vox.xml
 ToDo
