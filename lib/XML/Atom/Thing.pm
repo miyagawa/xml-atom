@@ -44,11 +44,6 @@ sub fixup_ns {
     $obj->{ns} = $obj->elem->namespaceURI;
 }
 
-sub version {
-    my $atom = shift;
-    XML::Atom::Util::ns_to_version($atom->ns);
-}
-
 sub init_xpath {
     my $atom = shift;
     my %param = @_ == 1 ? (Stream => $_[0]) : @_;

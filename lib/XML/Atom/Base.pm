@@ -43,6 +43,11 @@ sub element_ns { }
 sub ns   { $_[0]->{ns} }
 sub elem { $_[0]->{elem} }
 
+sub version {
+    my $atom = shift;
+    XML::Atom::Util::ns_to_version($atom->ns);
+}
+
 sub get {
     my $obj = shift;
     my($ns, $name) = @_;

@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 24;
+use Test::More tests => 32;
 use XML::Atom::Content;
 
 my $content;
@@ -61,6 +61,36 @@ $content->type('text/plain');
 eval { $content->body("Non-printable: " . chr(578)) };
 is $content->mode, 'base64';
 is $content->body, un_utf8("Non-printable: " . chr(578));
+
+# 1.0 with xhtml
+$content = XML::Atom::Content->new(Version => 1.0);
+$content->body("<div>foo bar</div>");
+
+is $content->type, 'xhtml';
+is $content->body, "<div>foo bar</div>";
+
+# 1.0 with html
+$content = XML::Atom::Content->new(Version => 1.0);
+$content->body("<p>foo bar");
+
+is $content->type, 'html';
+is $content->body, "<p>foo bar";
+
+# 1.0 as text
+$content = XML::Atom::Content->new(Version => 1.0);
+$content->body("foo bar");
+$content->type('text');
+
+is $content->type, 'text';
+is $content->body, "foo bar";
+
+# 1.0 as binary
+$content = XML::Atom::Content->new(Version => 1.0);
+$content->type('image/jpeg');
+$content->body("\xff\xde\xde\xde");
+
+is $content->type, 'image/jpeg';
+is $content->body, "\xff\xde\xde\xde";
 
 sub un_utf8 {
     my $foo = shift;

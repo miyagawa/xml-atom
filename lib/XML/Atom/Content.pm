@@ -43,7 +43,10 @@ sub body {
             } else {
                $elem->appendChild(XML::XPath::Node::Text->new(encode_base64($data, '')));
             }
-            $content->mode('base64');
+
+            if ($content->version == 0.3) {
+                $content->mode('base64');
+            }
         } else {
             my $copy = '<div xmlns="http://www.w3.org/1999/xhtml">' .
                        $data .
@@ -62,19 +65,41 @@ sub body {
             };
             if (!$@ && $node) {
                 $elem->appendChild($node);
-                $content->mode('xml');
+                if ($content->version == 0.3) {
+                    $content->mode('xml');
+                } else {
+                    $content->type('xhtml');
+                }
             } else {
                 if (LIBXML) {
                     $elem->appendChild(XML::LibXML::Text->new($data));
                 } else {
                     $elem->appendChild(XML::XPath::Node::Text->new($data));
                 }
-                $content->mode('escaped');
+
+                if ($content->version == 0.3) {
+                    $content->mode('escaped');
+                } else {
+                    $content->type($data =~ /^\s*</ ? 'html' : 'text');
+                }
             }
         }
     } else {
         unless (exists $content->{__body}) {
-            my $mode = $content->mode || 'xml';
+            my $mode;
+
+            if ($content->version == 0.3) {
+                $mode = $content->mode || 'xml';
+            } else {
+                $mode =
+                    $content->type eq 'xhtml'         ? 'xml'
+                  : $content->type =~ m![/\+]xml$!    ? 'xml'
+                  : $content->type eq 'html'          ? 'escaped'
+                  : $content->type eq 'text'          ? 'escaped'
+                  : $content->type =~ m!^text/!       ? 'escaped'
+                  :                                     'base64';
+            }
+
             if ($mode eq 'xml') {
                 my @children = grep ref($_) =~ /Element/,
                     LIBXML ? $elem->childNodes : $elem->getChildNodes;

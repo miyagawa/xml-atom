@@ -24,7 +24,7 @@ sub set_ns {
         $thing->{ns}      = $ns;
         $thing->{version} = $NS_VERSION{$ns};
     } else  {
-        my $version = delete $param->{Version} || '0.3';
+        my $version = delete $param->{Version} || $XML::Atom::DefaultVersion;
         $version    = '1.0' if $version == 1;
         my $ns = $NS_MAP{$version} or $thing->error("Unknown version: $version");
         $thing->{ns} = $ns;

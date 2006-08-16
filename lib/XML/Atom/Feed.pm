@@ -302,6 +302,25 @@ The only exception will be C<< $entry->content->body >>, if content
 type is not text/* (e.g. image/gif). In that case, the content body is
 still binary data, without Unicode flag set.
 
+=head1 CREATING ATOM 1.0 FEEDS
+
+By default, XML::Atom::Feed and other classes (Entry, Link and
+Content) will create entities using Atom 0.3 namespaces. You can
+override the default version number by setting
+C<$XML::Atom::DefaultVersion> global variable to "1.0".
+
+  use XML::Atom;
+
+  $XML::Atom::DefaultVersion = "1.0";
+
+  my $feed = XML::Atom::Feed->new;
+  $feed->title("blah");
+
+  my $entry = XML::Atom::Entry->new;
+  $feed->add_entry($entry);
+
+  $feed->version; # 1.0
+
 =head1 AUTHOR & COPYRIGHT
 
 Please see the I<XML::Atom> manpage for author, copyright, and license
