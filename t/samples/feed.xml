@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<feed version="0.2" xmlns="http://purl.org/atom/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xml:lang="en">
+  <!-- required feed elements -->
+  <title>dive into atom</title>
+  <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/" />
+  <modified>2003-08-25T11:39:42Z</modified>
+  <!-- in a single-author feed (like an individual weblog), put author at the feed level; in a multi-author feed (like a group weblog or a comments feed), put author at the entry level -->
+  <author>
+    <!-- required author elements -->
+    <name>Atom User</name>
+    <!-- optional author elements -->
+    <homepage>http://diveintomark.org/atom/</homepage>
+    <email>atom@example.com</email>
+  </author>
+
+  <!-- optional feed elements -->
+  <tagline></tagline>
+  <id>tag:diveintomark.org,2003:14</id>
+  <generator name="Movable Type">http://www.movabletype.org/?v=2.64</generator>
+  <copyright>Copyright (c) 2003, Atom User</copyright>
+  <entry>
+    <!-- required entry elements -->
+    <title>Test</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/archives/002447.html" />
+    <id>tag:diveintomark.org,2003:14.2447</id>
+    <issued>2003-08-25T07:39:42-05:00</issued>
+    <modified>2003-08-25T12:10:42Z</modified>
+
+    <!-- optional entry elements -->
+    <summary>Well, it&apos;s about testing, really.</summary>
+    <created>2003-08-25T11:39:42Z</created>
+    <dc:subject></dc:subject>
+    <content type="text/html" mode="xml" xml:lang="en"><div xmlns="http://www.w3.org/1999/xhtml"><p>Python is cool stuff for ReSTy webapps.</p></div></content>
+  </entry>
+  <entry>
+    <!-- required entry elements -->
+    <title>Created using the Fix Auth</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/archives/002444.html" />
+    <id>tag:diveintomark.org,2003:14.2444</id>
+    <issued>2003-08-25T04:04:26-05:00</issued>
+    <modified>2003-08-25T08:04:26Z</modified>
+
+    <!-- optional entry elements -->
+    <summary>Stuff....</summary>
+    <created>2003-08-25T08:04:26Z</created>
+    <dc:subject></dc:subject>
+    <content type="text/html" mode="escaped" xml:lang="en">
+      Stuff.
+      
+    </content>
+  </entry>
+  <entry>
+    <!-- required entry elements -->
+    <title>just a test - updated</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/archives/002441.html" />
+    <id>tag:diveintomark.org,2003:14.2441</id>
+    <issued>2003-08-24T00:08:37-05:00</issued>
+    <modified>2003-08-25T16:48:49Z</modified>
+
+    <!-- optional entry elements -->
+    <summary>rubys</summary>
+    <created>2003-08-24T04:08:37Z</created>
+    <dc:subject></dc:subject>
+    <content type="text/html" mode="escaped" xml:lang="en">
+      nothing to see here, move along
+      
+    </content>
+  </entry>
+  <entry>
+    <!-- required entry elements -->
+    <title>Second attempt.</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/archives/002440.html" />
+    <id>tag:diveintomark.org,2003:14.2440</id>
+    <issued>2003-08-22T21:28:17-05:00</issued>
+    <modified>2003-08-23T01:40:03Z</modified>
+
+    <!-- optional entry elements -->
+    <summary>Updating now works too. How about a new paragraph?...</summary>
+    <created>2003-08-23T01:28:17Z</created>
+    <dc:subject></dc:subject>
+    <content type="text/html" mode="escaped" xml:lang="en">
+      <![CDATA[<P><STRONG>Updating </STRONG>now works too.</P>
+<P>How about a new paragraph?</P>]]>
+      
+    </content>
+  </entry>
+  <entry>
+    <!-- required entry elements -->
+    <title>First post.</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/archives/002439.html" />
+    <id>tag:diveintomark.org,2003:14.2439</id>
+    <issued>2003-08-22T21:17:21-05:00</issued>
+    <modified>2003-08-25T11:40:02Z</modified>
+
+    <!-- optional entry elements -->
+    <summary>Testing a javascript client. Test. Again. and again....</summary>
+    <created>2003-08-23T01:17:21Z</created>
+    <dc:subject></dc:subject>
+    <content type="text/html" mode="escaped" xml:lang="en">
+      <![CDATA[Testing a <EM>javascript</EM> client. Test. Again. and again.]]>
+      
+    </content>
+  </entry>
+  <entry>
+    <!-- required entry elements -->
+    <title>Can anyone post?</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/archives/002437.html" />
+    <id>tag:diveintomark.org,2003:14.2437</id>
+    <issued>2003-08-20T12:11:55-05:00</issued>
+    <modified>2003-08-25T08:03:41Z</modified>
+
+    <!-- optional entry elements -->
+    <summary>(not) Mark tries to make a post</summary>
+    <created>2003-08-20T16:11:55Z</created>
+    <dc:subject></dc:subject>
+    <content type="text/html" mode="escaped" xml:lang="en">
+      <![CDATA[Is it OK for other people to post to this test implementation?<br /> <strong>It works!</strong>  Yes! for now]]>
+      
+    </content>
+  </entry>
+  <entry>
+    <!-- required entry elements -->
+    <title>Unit Test 1</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/archives/002431.html" />
+    <id>tag:diveintomark.org,2003:14.2431</id>
+    <issued>2003-08-18T15:21:06-05:00</issued>
+    <modified>2003-08-18T19:21:06Z</modified>
+
+    <!-- optional entry elements -->
+    <summary>This is what you get</summary>
+    <created>2003-08-18T19:21:06Z</created>
+    <dc:subject></dc:subject>
+    <content type="text/html" mode="escaped" xml:lang="en">
+      When you do unit testing.
+      
+    </content>
+  </entry>
+  <entry>
+    <!-- required entry elements -->
+    <title>Unit Test 1</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/archives/002430.html" />
+    <id>tag:diveintomark.org,2003:14.2430</id>
+    <issued>2003-08-18T15:18:54-05:00</issued>
+    <modified>2003-08-18T19:18:54Z</modified>
+
+    <!-- optional entry elements -->
+    <summary>This is what you get</summary>
+    <created>2003-08-18T19:18:54Z</created>
+    <dc:subject></dc:subject>
+    <content type="text/html" mode="escaped" xml:lang="en">
+      When you do unit testing.
+      
+    </content>
+  </entry>
+  <entry>
+    <!-- required entry elements -->
+    <title>Unit Test 1</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/archives/002427.html" />
+    <id>tag:diveintomark.org,2003:14.2427</id>
+    <issued>2003-08-18T15:13:11-05:00</issued>
+    <modified>2003-08-18T19:13:11Z</modified>
+
+    <!-- optional entry elements -->
+    <summary>This is what you get</summary>
+    <created>2003-08-18T19:13:11Z</created>
+    <dc:subject></dc:subject>
+    <content type="text/html" mode="escaped" xml:lang="en">
+      When you do unit testing.
+      
+    </content>
+  </entry>
+  <entry>
+    <!-- required entry elements -->
+    <title>Unit Test 1</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/archives/002426.html" />
+    <id>tag:diveintomark.org,2003:14.2426</id>
+    <issued>2003-08-18T15:12:31-05:00</issued>
+    <modified>2003-08-18T19:12:31Z</modified>
+
+    <!-- optional entry elements -->
+    <summary>This is what you get</summary>
+    <created>2003-08-18T19:12:31Z</created>
+    <dc:subject></dc:subject>
+    <content type="text/html" mode="escaped" xml:lang="en">
+      When you do unit testing.
+      
+    </content>
+  </entry>
+  <entry>
+    <!-- required entry elements -->
+    <title>Unit Test 1</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/archives/002425.html" />
+    <id>tag:diveintomark.org,2003:14.2425</id>
+    <issued>2003-08-18T15:11:56-05:00</issued>
+    <modified>2003-08-18T19:11:56Z</modified>
+
+    <!-- optional entry elements -->
+    <summary>This is what you get</summary>
+    <created>2003-08-18T19:11:56Z</created>
+    <dc:subject></dc:subject>
+    <content type="text/html" mode="escaped" xml:lang="en">
+      When you do unit testing.
+      
+    </content>
+  </entry>
+  <entry>
+    <!-- required entry elements -->
+    <title>Unit Test 1</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/archives/002424.html" />
+    <id>tag:diveintomark.org,2003:14.2424</id>
+    <issued>2003-08-18T15:11:21-05:00</issued>
+    <modified>2003-08-18T19:11:21Z</modified>
+
+    <!-- optional entry elements -->
+    <summary>This is what you get</summary>
+    <created>2003-08-18T19:11:21Z</created>
+    <dc:subject></dc:subject>
+    <content type="text/html" mode="escaped" xml:lang="en">
+      When you do unit testing.
+      
+    </content>
+  </entry>
+  <entry>
+    <!-- required entry elements -->
+    <title>Unit Test 1</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/archives/002423.html" />
+    <id>tag:diveintomark.org,2003:14.2423</id>
+    <issued>2003-08-18T15:10:50-05:00</issued>
+    <modified>2003-08-18T19:10:50Z</modified>
+
+    <!-- optional entry elements -->
+    <summary>This is what you get</summary>
+    <created>2003-08-18T19:10:50Z</created>
+    <dc:subject></dc:subject>
+    <content type="text/html" mode="escaped" xml:lang="en">
+      When you do unit testing.
+      
+    </content>
+  </entry>
+  <entry>
+    <!-- required entry elements -->
+    <title>Unit Test 1</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/archives/002421.html" />
+    <id>tag:diveintomark.org,2003:14.2421</id>
+    <issued>2003-08-18T15:07:58-05:00</issued>
+    <modified>2003-08-18T19:07:58Z</modified>
+
+    <!-- optional entry elements -->
+    <summary>This is what you get</summary>
+    <created>2003-08-18T19:07:58Z</created>
+    <dc:subject></dc:subject>
+    <content type="text/html" mode="escaped" xml:lang="en">
+      When you do unit testing.
+      
+    </content>
+  </entry>
+  <entry>
+    <!-- required entry elements -->
+    <title>Unit Test 1</title>
+    <link rel="alternate" type="text/html" href="http://diveintomark.org/atom/archives/002420.html" />
+    <id>tag:diveintomark.org,2003:14.2420</id>
+    <issued>2003-08-18T14:59:24-05:00</issued>
+    <modified>2003-08-18T18:59:24Z</modified>
+
+    <!-- optional entry elements -->
+    <summary>This is what you get</summary>
+    <created>2003-08-18T18:59:24Z</created>
+    <dc:subject></dc:subject>
+    <content type="text/html" mode="escaped" xml:lang="en">
+      When you do unit testing.
+      
+    </content>
+  </entry>
+
+</feed>

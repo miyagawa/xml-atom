@@ -1,0 +1,13 @@
+^_build
+^Build$
+\bCVS\b
+~$
+\.bak$
+^MANIFEST\.SKIP$
+^Makefile$
+\.old$
+^blib
+^pm_to_blib$
+\.tar\.gz$
+21-client.t$
+22-autodiscovery.t$

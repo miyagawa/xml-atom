@@ -1,0 +1,120 @@
+$Id: Changes,v 1.28 2004/12/31 22:54:44 btrott Exp $
+
+Revision history for XML::Atom
+
+0.11
+    - Eliminated unitialized value warning on <link /> attributes that
+      aren't set.
+
+0.10  2004.09.06
+    - Added XML::Atom::Feed->version to get and set the version of the feed.
+    - XML::Atom::Feed->language can now be used to set the language of
+      the feed.
+    - Added support for using XML::XPath in XML::Atom::Server. Thanks to
+      Autrijus Tang for the patch.
+
+0.09  2004.07.29
+    - Fixed "500 Malformed characters in syswrite" bug with utf-8. Thanks to
+      Tatsuhiko Miyagawa for the patch.
+    - Fixed bug in server where empty XML response would cause an error. Thanks
+      to Tatsuhiko Miyagawa for the patch.
+
+0.08  2004.06.01
+    - Added XML::Atom::Feed::language method, which returns the language
+      of the feed (from 'xml:lang').
+    - Added XML::Atom::Feed::author, which returns a XML::Atom::Person
+      object representing the <author> element.
+    - Remove the default: namespace prefix that XML::LibXML adds inside
+      <content mode="xml"> elements.
+    - Use LWP::Authen::Wsse module for WSSE authentication when in REST
+      mode, which handles redirects properly.
+
+0.07  2004.05.15
+    - Added (experimental) support for using XML::XPath as an alternative
+      to XML::LibXML. This is detected automatically upon loading XML::Atom;
+      XML::LibXML is still the default.
+    - WSSE authentication tokens now persist properly across server
+      redirects. Thanks to Autrijus Tang for the patch.
+    - Fixed bug where empty password (empty string or "0") would cause
+      an invalid login in Atom server core. Also, improved error message
+      on invalid password for security. Thanks to Tatsuhiki Miyagawa
+      for the patch.
+
+0.06  2004.04.14
+    - BACKWARDS INCOMPATIBILITY:
+      Fixed Nonce behavior in API. Nonce should be sent in base64-encoded
+      form in SOAP and REST requests, but decoded (raw) nonce should be used
+      when generating PasswordDigest.
+    - Feed->add_link and Entry->add_link now support the same hash
+      reference parameter style as used in 0.041 and below, in addition
+      to the XML::Atom::Link parameter.
+    - Fixed bug with Feed->link so that it no longer returns links that
+      are contained within <entry> elements within the <feed>.
+
+0.05  2004.01.05
+    - BACKWARDS INCOMPABILITY:
+      Removed XML::Atom::Entry::get_links and XML::Atom::Feed::get_links,
+      in favor of new link() method in both classes, which returns a list
+      of XML::Atom::Link objects. Also, add_link() now expects an
+      XML::Atom::Link object instead of a hash reference.
+    - BACKWARDS INCOMPABILITY:
+      Renamed XML::Atom::API to XML::Atom::Client.
+    - Added XML::Atom::Link, an encapsulation of the <link> tag in a feed
+      or an entry.
+    - Added XML::Atom::Server, an implementation of an Atom core server
+      (to be subclassed for implementation-specific methods).
+    - Fixed feed auto-discovery to work with all client tests at
+      http://diveintomark.org/tests/client/autodiscovery/
+    - Added (and documented) XML::Atom::Feed->find_feeds, to return all
+      of the Atom feed URIs on a page given a URI.
+    - Fixed issue with PasswordDigest in API (use sha(), not hex(sha())
+      for generating password digest).
+    - Stream parameter to XML::Atom::Entry::new and XML::Atom::Feed::new
+      is now optional; if passed only one parameter, it's assumed to be
+      the Stream parameter.
+    - Fixed bug in XML::Atom::Content::as_xml (it didn't work).
+
+0.041 2003.12.15
+    - Fixed issue with calling $entry->content on list of entries generated
+      from $feed->entries. (Thanks to esummers for the report.)
+
+0.04  2003.12.14
+    - BACKWARDS INCOMPABILITY:
+      <content> elements are now represented as XML::Atom::Content objects
+      instead of just get/set accessors. You can still set
+      XML::Atom::Entry::content with a scalar (it will be automatically
+      upgraded to an XML::Atom::Content object), but to get the value of
+      <content>, you need to call XML::Atom::Content::Body. For example:
+          $entry->content->body
+    - XML::Atom::Entry::content now removes the <div> wrapper from
+      XHTML <content> when called with no arguments.
+    - Changed XML::Atom::Author to XML::Atom::Person and re-implemented it.
+    - Changed "WSSE" to "UsernameToken" in X-WSSE header.
+
+0.03  2003.12.05
+    - Added XML::Atom::Author to represent author or contributor, with
+      accessors for name, email, URL, etc.
+    - Updated XML::Atom::API per the 08 API spec:
+          * Removed searchEntries and replaced it with getFeed
+          * Removed introspection and replaced it with URI parameters
+            to createEntry and getFeed (introspection will be added
+            back in once it is more locked down)
+    - Added support for easily adding <link> tags to feed or entry
+      (eg XML::Atom::Feed::add_link) and getting <link> tags from feed or
+      entry (eg XML::Atom::Feed::get_links).
+    - Fixed XML::Atom::Thing::get to return undef when an element is
+      not found in the object at all (it used to return the empty string).
+
+0.02  2003.09.28
+    - Completely revamped authentication mechanism to use X-WSSE header
+      (or corresponding SOAP headers).
+    - Removed 03-client.t test, because there aren't any publicly
+      available servers to test against. (Are there?)
+    - Added support for SOAP wrapper in API client.
+    - Added namespace support in XML::Atom::Namespace using get and set
+      methods in XML::Atom::Entry and XML::Atom::Feed.
+    - Added namespace normalization for produced XML (if XML::LibXSLT
+      is installed). This is really just a cosmetic thing.
+
+0.01  2003.09.07
+    - Initial distribution.

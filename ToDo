@@ -1,0 +1,6 @@
+xx * Use DateTime for date and time handling.
+* Support for multipart content entries.
+xx * Fuller test suite.
+xx * Author name/URL/email access methods.
+xx * Namespace normalization?
+xx * Namespace support.

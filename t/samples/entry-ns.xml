@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entry xmlns="http://purl.org/atom/ns#">
+  <title xmlns="http://purl.org/atom/ns#">Unit Test 1</title>
+  <content xmlns="http://purl.org/atom/ns#" mode="xml">
+    <div xmlns="http://www.w3.org/1999/xhtml"><img src="foo.gif" align="left"/> This is what you get when you do unit testing.</div>
+  </content>
+</entry>
