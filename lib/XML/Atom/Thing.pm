@@ -122,12 +122,6 @@ sub link {
     }
 }
 
-sub as_xml {
-    my $obj = shift;
-    remove_default_ns($obj->elem) if LIBXML;
-    return $obj->SUPER::as_xml;
-}
-
 # 0.3 -> 1.0 elements aliasing
 sub _rename_elements {
     my($class, $atom03, $atom10) = @_;

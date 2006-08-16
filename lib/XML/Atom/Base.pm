@@ -5,7 +5,7 @@ use strict;
 use base qw( XML::Atom::ErrorHandler );
 
 use XML::Atom;
-use XML::Atom::Util qw( set_ns first nodelist childlist create_element );
+use XML::Atom::Util qw( set_ns first nodelist childlist create_element remove_default_ns );
 
 sub new {
     my $class = shift;
@@ -207,6 +207,7 @@ sub as_xml {
     if (LIBXML) {
         my $doc = XML::LibXML::Document->new('1.0', 'utf-8');
         $doc->setDocumentElement($obj->elem);
+        remove_default_ns($obj->elem);
         return $doc->toString(1);
     } else {
         return '<?xml version="1.0" encoding="utf-8"?>' . "\n" .
