@@ -326,6 +326,27 @@ sub _element {
     wantarray ? @{$thing->{'__' . $name}} : $thing->{'__' . $name}->[0];
 }
 
+# 0.3 -> 1.0 elements aliasing
+sub _rename_elements {
+    my($class, $atom03, $atom10) = @_;
+    no strict 'refs';
+    *{"$class\::$atom03"} = sub {
+        my $self = shift;
+        if ($self->version eq "1.0") {
+            return $self->$atom10(@_);
+        }
+        @_ > 1 ? $self->set($self->ns, $atom03, @_) : $self->get($self->ns, $atom03);
+    };
+
+    *{"$class\::$atom10"} = sub {
+        my $self = shift;
+        if ($self->version eq "0.3") {
+            return $self->$atom03(@_);
+        }
+        @_ > 1 ? $self->set($self->ns, $atom10, @_) : $self->get($self->ns, $atom10);
+    };
+}
+
 sub DESTROY { }
 
 use vars qw( $AUTOLOAD );

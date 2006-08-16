@@ -21,6 +21,10 @@ sub content {
     $entry->_element('XML::Atom::Content', 'content', @arg);
 }
 
+__PACKAGE__->_rename_elements('issued' => 'published');
+__PACKAGE__->_rename_elements('modified' => 'updated');
+
+
 1;
 __END__
 

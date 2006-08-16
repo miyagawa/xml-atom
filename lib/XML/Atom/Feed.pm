@@ -156,6 +156,9 @@ sub add_entry_xpath {
     }
 }
 
+__PACKAGE__->_rename_elements('modified' => 'updated');
+__PACKAGE__->_rename_elements('tagline' => 'subtitle');
+
 1;
 __END__
 
