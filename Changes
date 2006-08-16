@@ -2,7 +2,7 @@ $Id$
 
 Revision history for XML::Atom
 
-0.11
+0.11  2005.02.23
     - Remove the default: namespace when converting to XML using as_xml
       (the earlier fix only fixed it when getting the contents of an entry
       using $entry->content).
