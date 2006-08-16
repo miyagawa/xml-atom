@@ -16,7 +16,7 @@ sub content {
     my $entry = shift;
     if (my @arg = @_) {
         if (ref($arg[0]) ne 'XML::Atom::Content') {
-            $arg[0] = XML::Atom::Content->new($arg[0]);
+            $arg[0] = XML::Atom::Content->new(Body => $arg[0], Version => $entry->version);
         }
         $entry->set($entry->ns, 'content', @arg);
     } else {

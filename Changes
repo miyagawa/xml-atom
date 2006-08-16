@@ -2,6 +2,11 @@ $Id$
 
 Revision history for XML::Atom
 
+0.21  2006.07.13
+    * propagate $entry's version when we create content element off of entry
+      using $entry->content("foo") syntax.
+      (Thanks to Simon Wistow for spotting this bug)
+
 0.20  2006.07.12
     * Lots of refactoring, which simplifies much of the code in the various
       construct modules (Person, Link, etc), and which should also make it
