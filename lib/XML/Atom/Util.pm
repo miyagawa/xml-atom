@@ -20,11 +20,12 @@ our %NS_VERSION = reverse %NS_MAP;
 sub set_ns {
     my $thing = shift;
     my($param) = @_;
-    if ($param->{Namespace}) {
-        $thing->{ns} = $param->{Namespace};
-        $thing->{version} = $NS_VERSION{$param->{Namespace}};
+    if (my $ns = delete $param->{Namespace}) {
+        $thing->{ns}      = $ns;
+        $thing->{version} = $NS_VERSION{$ns};
     } else  {
-        my $version = $param->{Version} || '0.3';
+        my $version = delete $param->{Version} || '0.3';
+        $version    = '1.0' if $version == 1;
         my $ns = $NS_MAP{$version} or $thing->error("Unknown version: $version");
         $thing->{ns} = $ns;
         $thing->{version} = $version;
