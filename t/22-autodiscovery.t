@@ -1,4 +1,4 @@
-# $Id: 22-autodiscovery.t,v 1.2 2003/12/30 07:38:47 btrott Exp $
+# $Id$
 
 use strict;
 
@@ -6,6 +6,7 @@ use XML::Atom::Feed;
 use URI;
 use HTML::TokeParser;
 use LWP::UserAgent;
+use Test::More;
 
 my $index = 'http://diveintomark.org/tests/client/autodiscovery/';
 
@@ -24,8 +25,11 @@ while (my $token = $p->get_token) {
     push @tests, URI->new_abs($token->[2]{href}, $index)->as_string;
 }
 
-require Test::More;
-Test::More->import(tests => @tests * 4);
+unless (@tests) {
+    plan skip_all => "Something's wrong with the test suite";
+}
+
+plan tests => @tests * 4;
 for my $uri (@tests) {
     my @feeds = XML::Atom::Feed->find_feeds($uri);
     ok(scalar @feeds, "$uri has feeds");
