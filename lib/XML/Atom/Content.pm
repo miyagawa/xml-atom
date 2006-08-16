@@ -132,6 +132,7 @@ sub body {
                 my $raw = decode_base64(LIBXML ? $elem->textContent : $elem->string_value);
                 if ($content->type && $content->type =~ m!^text/!) {
                     $content->{__body} = eval { Encode::decode("utf-8", $raw) } || $raw;
+                    Encode::_utf8_off($content->{__body});
                 } else {
                     $content->{__body} = $raw;
                 }

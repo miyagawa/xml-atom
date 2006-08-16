@@ -64,4 +64,11 @@ $content = XML::Atom::Content->new;
 $content->type('text/plain');
 eval { $content->body("Non-printable: " . chr(578)) };
 ok($content->mode, 'base64');
-ok($content->body, "Non-printable: " . chr(578));
+ok($content->body, un_utf8("Non-printable: " . chr(578)));
+
+sub un_utf8 {
+    my $foo = shift;
+    Encode::_utf8_off($foo);
+    $foo;
+}
+
