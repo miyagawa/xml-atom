@@ -2,6 +2,12 @@ $Id$
 
 Revision history for XML::Atom
 
+0.14
+    - Fixed bug that it decodes binary data as UTF-8 octet
+      (Thanks to Mahlon E. Smith)
+    - Don't eat up STDIN in cgi-mode
+      (Thanks to Bayle Shanks)
+
 0.13_02
     - Now supports insert mode, by passing hash reference in add_entry
       $feed->add_entry($entry, { mode => 'insert' });

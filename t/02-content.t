@@ -51,6 +51,7 @@ ok($content->mode, 'escaped');
 
 $content = XML::Atom::Content->new;
 $content->body("This is a test that should use base64\x7f.");
+$content->type('text/plain');
 ok($content->mode, 'base64');
 ok($content->body, "This is a test that should use base64\x7f.");
 
@@ -60,6 +61,7 @@ ok($content->mode, 'xml');
 ok($content->body, "My name is \xe5\xae\xae\xe5\xb7\x9d.");
 
 $content = XML::Atom::Content->new;
+$content->type('text/plain');
 eval { $content->body("Non-printable: " . chr(578)) };
 ok($content->mode, 'base64');
 ok($content->body, "Non-printable: " . chr(578));
