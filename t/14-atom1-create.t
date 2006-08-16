@@ -26,7 +26,7 @@ $feed = XML::Atom::Feed->new;
 $feed->title("foo bar");
 $feed->add_link({ href => "http://www.example.com/" });
 
-my $entry = XML::Atom::Entry->new;
+$entry = XML::Atom::Entry->new;
 $entry->title("Foo Bar");
 
 $feed->add_entry($entry);
