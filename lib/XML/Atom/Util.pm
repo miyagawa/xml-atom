@@ -1,4 +1,4 @@
-# $Id: Util.pm,v 1.4 2004/05/08 13:20:58 btrott Exp $
+# $Id$
 
 package XML::Atom::Util;
 use strict;
@@ -6,7 +6,7 @@ use strict;
 use XML::Atom;
 use vars qw( @EXPORT_OK @ISA );
 use Exporter;
-@EXPORT_OK = qw( first textValue iso2dt encode_xml );
+@EXPORT_OK = qw( first textValue iso2dt encode_xml remove_default_ns );
 @ISA = qw( Exporter );
 
 sub first {
@@ -59,6 +59,15 @@ sub encode_xml {
     my($str) = @_;
     $str =~ s!($RE)!$Map{$1}!g;
     $str;
+}
+
+sub remove_default_ns {
+    my($node) = @_;
+    $node->setNamespace('http://www.w3.org/1999/xhtml', '')
+        if $node->nodeName =~ /^default:/ && ref($node) =~ /Element$/;
+    for my $n ($node->childNodes) {
+        remove_default_ns($n);
+    }
 }
 
 1;

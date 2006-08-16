@@ -1,11 +1,11 @@
-# $Id: Thing.pm,v 1.14 2004/12/31 22:54:46 btrott Exp $
+# $Id$
 
 package XML::Atom::Thing;
 use strict;
 
 use XML::Atom;
 use base qw( XML::Atom::ErrorHandler );
-use XML::Atom::Util qw( first );
+use XML::Atom::Util qw( first remove_default_ns );
 use XML::Atom::Link;
 use LWP::UserAgent;
 BEGIN {
@@ -244,6 +244,7 @@ EOX
         my $results = $sheet->transform($doc);
         return $sheet->output_string($results);
     } else {
+        remove_default_ns($doc->getDocumentElement);
         return $doc->toString(LIBXML ? 1 : 0);
     }
 }

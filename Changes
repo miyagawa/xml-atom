@@ -2,6 +2,11 @@ $Id$
 
 Revision history for XML::Atom
 
+0.11
+    - Remove the default: namespace when converting to XML using as_xml
+      (the earlier fix only fixed it when getting the contents of an entry
+      using $entry->content).
+
 0.10  2004.12.31
     - Eliminated unitialized value warning on <link /> attributes that
       aren't set.

@@ -1,10 +1,11 @@
-# $Id: Content.pm,v 1.6 2004/05/31 17:20:07 btrott Exp $
+# $Id$
 
 package XML::Atom::Content;
 use strict;
 
 use XML::Atom;
 use base qw( XML::Atom::ErrorHandler );
+use XML::Atom::Util qw( remove_default_ns );
 use MIME::Base64 qw( encode_base64 decode_base64 );
 
 use constant NS => 'http://purl.org/atom/ns#';
@@ -113,7 +114,7 @@ sub body {
                     }
                     $content->{__body} = '';
                     for my $n (@children) {
-                        _remove_default_ns($n) if LIBXML;
+                        remove_default_ns($n) if LIBXML;
                         $content->{__body} .= $n->toString(LIBXML ? 1 : 0);
                     }
                 } else {
@@ -133,15 +134,6 @@ sub body {
         }
     }
     $content->{__body};
-}
-
-sub _remove_default_ns {
-    my($node) = @_;
-    $node->setNamespace('http://www.w3.org/1999/xhtml', '')
-        if ref($node) =~ /Element$/;
-    for my $n ($node->childNodes) {
-        _remove_default_ns($n);
-    }
 }
 
 sub as_xml {
