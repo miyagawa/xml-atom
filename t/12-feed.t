@@ -6,7 +6,7 @@ use Test;
 use XML::Atom::Feed;
 use URI;
 
-BEGIN { plan tests => 28 };
+BEGIN { plan tests => 30 };
 
 my $feed;
 
@@ -60,3 +60,13 @@ ok($links[-1]->title, 'Number Three');
 ok($links[-1]->rel, 'service.post');
 ok($links[-1]->href, 'http://www.example.com/atom');
 ok($links[-1]->type, 'application/x.atom+xml');
+
+# Test we can insert an entry in the front.
+$entry = XML::Atom::Entry->new;
+$entry->title('Bar');
+$entry->content('<p>This is another test.</p>');
+$feed->add_entry($entry, { mode => 'insert' });
+@entries = $feed->entries;
+
+ok(scalar @entries, 17);
+ok($entries[0]->title, 'Bar');

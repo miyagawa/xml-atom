@@ -2,6 +2,19 @@ $Id$
 
 Revision history for XML::Atom
 
+0.13_02
+    - Now supports insert mode, by passing hash reference in add_entry
+      $feed->add_entry($entry, { mode => 'insert' });
+      (Thanks to Dominic Mitchell)
+
+0.13_01  2005.09.13
+    - Now supports creating version 1.0 feed by passing new(Version => 1.0)
+    - Be more strict in utf-8 handling and base64ing
+      (Thanks to Dave Rolsky)
+
+0.13  2005.08.18
+    - Bumped up the version
+
 0.12_02
     - $feed->version now returns 1.0 when xmlns patches with that for 1.0
     - Fixed segmentation fault problem with <atom:content> longer than 2.5k

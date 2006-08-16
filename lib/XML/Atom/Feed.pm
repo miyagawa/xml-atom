@@ -123,14 +123,29 @@ sub entries_xpath {
 
 sub add_entry_libxml {
     my $feed = shift;
-    my($entry) = @_;
-    $feed->{doc}->getDocumentElement->appendChild($entry->{doc}->getDocumentElement);
+    my($entry, $opt) = @_;
+    $opt ||= {};
+    if ($opt->{mode} && $opt->{mode} eq 'insert') {
+        $feed->{doc}->getDocumentElement->insertBefore(
+            $entry->{doc}->getDocumentElement,
+            $feed->{doc}->getDocumentElement->firstChild,
+        );
+    } else {
+        $feed->{doc}->getDocumentElement->appendChild(
+            $entry->{doc}->getDocumentElement,
+        );
+    }
 }
 
 sub add_entry_xpath {
     my $feed = shift;
-    my($entry) = @_;
-    $feed->{doc}->appendChild($entry->{doc});
+    my($entry, $opt) = @_;
+    $opt ||= {};
+    if ($opt->{mode} && $opt->{mode} eq 'insert') {
+        $feed->{doc}->insertBefore($entry->{doc}, $feed->{doc}->getFirstChild);
+    } else {
+        $feed->{doc}->appendChild($entry->{doc});
+    }
 }
 
 1;
@@ -150,6 +165,8 @@ XML::Atom::Feed - Atom feed
     $entry->title('First Post');
     $entry->content('Post Body');
     $feed->add_entry($entry);
+    $feed->add_entry($entry, { mode => 'insert' });
+
     my @entries = $feed->entries;
     my $xml = $feed->as_xml;
 
@@ -228,6 +245,17 @@ the feed as a new I<E<lt>linkE<gt>> tag. For example:
     $link->rel('alternate');
     $link->href('http://www.example.com/');
     $feed->add_link($link);
+
+=head2 $feed->add_entry($entry)
+
+Adds the entry I<$entry>, which must be an I<XML::Atom::Entry> object,
+to the feed. If you want to add an entry before existent entries, you can pass optional hash reference containing C<mode> value set to C<insert>.
+
+  $feed->add_entry($entry, { mode => 'insert' });
+
+=head2 $feed->entries
+
+Returns list of XML::Atom::Entry objects contained in the feed.
 
 =head2 $feed->language
 
