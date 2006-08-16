@@ -6,6 +6,11 @@ Revision history for XML::Atom
     - Remove the default: namespace when converting to XML using as_xml
       (the earlier fix only fixed it when getting the contents of an entry
       using $entry->content).
+    - UTF-8 data is no longer base64-encoded in XML::Atom::Content. Thanks
+      to Tatsuhiko Miyagawa for the patch.
+    - Added XML::Atom::Entry::getlist($ns, $element) to retrieve the values
+      of an element that may appear multiple times in the entry (like
+      dc:subject). Thanks to Tatsuhiko Miyagawa for the patch.
 
 0.10  2004.12.31
     - Eliminated unitialized value warning on <link /> attributes that

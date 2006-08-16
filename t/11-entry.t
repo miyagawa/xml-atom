@@ -1,4 +1,4 @@
-# $Id: 11-entry.t,v 1.10 2004/05/08 13:20:58 btrott Exp $
+# $Id$
 
 use strict;
 
@@ -7,7 +7,7 @@ use XML::Atom;
 use XML::Atom::Entry;
 use XML::Atom::Person;
 
-BEGIN { plan tests => 60 }
+BEGIN { plan tests => 63 }
 
 my $entry;
 
@@ -40,6 +40,10 @@ $entry->author->name('Ben');
 ok($entry->author->url, 'http://mena.typepad.com/');
 my $dc = XML::Atom::Namespace->new(dc => 'http://purl.org/dc/elements/1.1/');
 ok($entry->get($dc->subject), 'Food');
+my @subj = $entry->getlist($dc->subject);
+ok(@subj == 2);
+ok($subj[0], 'Food');
+ok($subj[1], 'Cats');
 ok($entry->content);
 ok($entry->content->body, '<p>No, Ben isn\'t updating. It\'s me testing out guest author functionality.</p>');
 

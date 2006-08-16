@@ -6,21 +6,25 @@ use strict;
 use XML::Atom;
 use vars qw( @EXPORT_OK @ISA );
 use Exporter;
-@EXPORT_OK = qw( first textValue iso2dt encode_xml remove_default_ns );
+@EXPORT_OK = qw( first nodelist textValue iso2dt encode_xml remove_default_ns );
 @ISA = qw( Exporter );
 
 sub first {
+    my @nodes = nodelist(@_);
+    return unless @nodes;
+    return $nodes[0];
+}
+
+sub nodelist {
     if (LIBXML) {
-        my @res = $_[1] ? $_[0]->getElementsByTagNameNS($_[1], $_[2]) :
-                          $_[0]->getElementsByTagName($_[2]);
-        return unless @res;
-        return $res[0];
+        return  $_[1] ? $_[0]->getElementsByTagNameNS($_[1], $_[2]) :
+                $_[0]->getElementsByTagName($_[2]);
     } else {
         my $set = $_[1] ?
             $_[0]->find("descendant::*[local-name()='$_[2]' and namespace-uri()='$_[1]']") :
             $_[0]->find("descendant::$_[2]");
         return unless $set && $set->isa('XML::XPath::NodeSet');
-        ($set->get_nodelist)[0];
+        return $set->get_nodelist;
     }
 }
 

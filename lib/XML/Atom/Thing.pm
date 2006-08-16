@@ -5,7 +5,7 @@ use strict;
 
 use XML::Atom;
 use base qw( XML::Atom::ErrorHandler );
-use XML::Atom::Util qw( first remove_default_ns );
+use XML::Atom::Util qw( first nodelist remove_default_ns );
 use XML::Atom::Link;
 use LWP::UserAgent;
 BEGIN {
@@ -107,6 +107,21 @@ sub get {
         Encode::_utf8_off($val);
     }
     $val;
+}
+
+sub getlist {
+    my $atom = shift;
+    my($ns, $name) = @_;
+    my $ns_uri = ref($ns) eq 'XML::Atom::Namespace' ? $ns->{uri} : $ns;
+    my @node = nodelist($atom->{doc}, $ns_uri, $name);
+     map {
+        my $val = LIBXML ? $_->textContent : $_->string_value;
+        if ($] >= 5.008) {
+            require Encode;
+            Encode::_utf8_off($val);
+        }
+        $val;
+     } @node;
 }
 
 sub set_libxml {

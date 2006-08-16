@@ -65,7 +65,7 @@ sub body {
         } else {
             $elem->removeChild($_) for $elem->getChildNodes;
         }
-        if ($data =~ /[^\x09\x0a\x0d\x20-\x7f]/) {
+        if (!_is_printable($data)) {
             if (LIBXML) {
                $elem->appendChild(XML::LibXML::Text->new(encode_base64($data, '')));
             } else {
@@ -134,6 +134,13 @@ sub body {
         }
     }
     $content->{__body};
+}
+
+sub _is_printable {
+    my $data = shift;
+
+    # printable ASCII or UTF-8 bytes
+    $data =~ /^(?:[\x09\x0a\x0d\x20-\x7f]|[\xc0-\xdf][\x80-\xbf]|[\xe0-\xef][\x80-\xbf][\x80-\xbf])*$/;
 }
 
 sub as_xml {

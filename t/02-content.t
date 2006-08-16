@@ -1,11 +1,11 @@
-# $Id: 02-content.t,v 1.3 2004/05/08 18:33:46 btrott Exp $
+# $Id$
 
 use strict;
 
 use Test;
 use XML::Atom::Content;
 
-BEGIN { plan tests => 22 };
+BEGIN { plan tests => 24 };
 
 my $content;
 
@@ -53,3 +53,8 @@ $content = XML::Atom::Content->new;
 $content->body("This is a test that should use base64\0.");
 ok($content->mode, 'base64');
 ok($content->body, "This is a test that should use base64\0.");
+
+$content = XML::Atom::Content->new;
+$content->body("My name is \xe5\xae\xae\xe5\xb7\x9d.");
+ok($content->mode, 'xml');
+ok($content->body, "My name is \xe5\xae\xae\xe5\xb7\x9d.");

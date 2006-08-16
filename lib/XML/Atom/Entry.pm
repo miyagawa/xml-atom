@@ -1,4 +1,4 @@
-# $Id: Entry.pm,v 1.14 2004/05/30 08:12:06 btrott Exp $
+# $Id$
 
 package XML::Atom::Entry;
 use strict;
@@ -105,6 +105,23 @@ the entry as a new I<E<lt>linkE<gt>> tag. For example:
     $link->rel('alternate');
     $link->href('http://www.example.com/2003/12/post.html');
     $entry->add_link($link);
+
+=head2 $entry->get($ns, $element)
+
+Given an I<XML::Atom::Namespace> element I<$ns> and an element name
+I<$element>, retrieves the value for the element in that namespace.
+
+This is useful for retrieving the value of elements not in the main Atom
+namespace, like categories. For example:
+
+    my $dc = XML::Atom::Namespace->new(dc => 'http://purl.org/dc/elements/1.1/');
+    my $subj = $entry->get($dc, 'subject');
+
+=head2 $entry->getlist($ns, $element)
+
+Just like I<$entry-E<gt>get>, but if there are multiple instances of the
+element I<$element> in the namespace I<$ns>, returns all of them. I<get>
+will return only the first.
 
 =head1 AUTHOR & COPYRIGHT
 

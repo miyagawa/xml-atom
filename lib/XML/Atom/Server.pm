@@ -1,4 +1,4 @@
-# $Id: Server.pm,v 1.7 2004/09/06 12:02:56 btrott Exp $
+# $Id$
 
 package XML::Atom::Server;
 use strict;
@@ -227,6 +227,7 @@ sub show_error {
 FAULT
     } else {
         return <<ERR;
+<?xml version="1.0" encoding="utf-8"?>
 <error>$err</error>
 ERR
     }
