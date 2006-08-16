@@ -2,6 +2,9 @@ $Id$
 
 Revision history for XML::Atom
 
+0.17  2006.02.22
+    * Fixed problem with XML::XPath
+
 0.16  2005.11.22
     * Fixed a terrible bug when you set binary data to $entry->content
 

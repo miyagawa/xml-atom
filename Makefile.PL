@@ -12,11 +12,18 @@ sign(0);
 
 include('ExtUtils::AutoInstall');
 
-requires('XML::LibXML' => 1.54);
 requires('MIME::Base64');
 requires('URI');
 
 features(
+    'Faster XML parsing with libxml' => [
+        -default => 1,
+        recommends('XML::LibXML' => 1.54),
+    ],
+    'Pure perl XML parsing with XML::XPath' => [
+        -default => 1,
+        recommends('XML::XPath'),
+    ],
     'Client/Server for Atom API' => [
         -default => 1,
         recommends('LWP'),
