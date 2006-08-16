@@ -148,6 +148,12 @@ sub body {
 
 sub _is_printable {
     my $data = shift;
+    use Unicode::CheckUTF8;
+    Unicode::CheckUTF8::is_utf8($data);
+}
+
+sub _is_printabl {
+    my $data = shift;
 
     # try decoding this $data with UTF-8
     my $decoded =

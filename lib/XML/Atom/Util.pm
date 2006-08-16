@@ -104,7 +104,7 @@ sub encode_xml {
 sub remove_default_ns {
     my($node) = @_;
     $node->setNamespace('http://www.w3.org/1999/xhtml', '')
-        if $node->nodeName =~ /^default:/ && ref($node) =~ /Element$/;
+        if ($node->nodeName) =~ /^default:/ && ref($node) =~ /Element$/;
     for my $n ($node->childNodes) {
         remove_default_ns($n);
     }

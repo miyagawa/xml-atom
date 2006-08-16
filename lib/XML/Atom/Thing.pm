@@ -73,6 +73,7 @@ sub version {
 sub init_xpath {
     my $atom = shift;
     my %param = @_ == 1 ? (Stream => $_[0]) : @_;
+    $atom->set_ns(\%param);
     my $elem_name = $atom->element_name;
     if (%param) {
         if (my $stream = $param{Stream}) {
@@ -273,7 +274,7 @@ sub contributor {
 
 sub as_xml {
     my $doc = $_[0]->{doc};
-    remove_default_ns($doc->getDocumentElement);
+    remove_default_ns($doc->getDocumentElement) if LIBXML;
     my $xml = $doc->toString(LIBXML ? 1 : 0);
     if ($] > 5.008) {
         require Encode;
