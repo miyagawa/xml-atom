@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="euc-jp"?>
+  <entry xmlns="http://purl.org/atom/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <title>ゲストオーサー</title>
+    <link rel="alternate" type="text/html" href="http://ben.stupidfool.org/typepad/2003/07/guest_author.html" />
+    <link rel="service.edit" title="Edit" type="application/x.atom+xml" href="http://www.example.com/atom/entry_id=75207" />
+    <id>tag:typepad.com:post:75207</id>
+    <issued>2003-07-21T02:47:34-07:00</issued>
+    <modified>2003-08-22T18:36:57-07:00</modified>
+    <created>2003-07-21T02:47:34-07:00</created>
+    <summary>No, Ben isn&apos;t updating. It&apos;s me testing out guest author functionality....</summary>
+    <author>
+      <name>Mena</name>
+      <url>http://mena.typepad.com/</url>
+    </author>
+    <dc:subject>Food</dc:subject>
+    <dc:subject>Cats</dc:subject>
+    <content type="text/html" xml:lang="en-us">
+<div xmlns="http://www.w3.org/1999/xhtml"><p>日本語のフィード</p></div>
+</content>
+  </entry>

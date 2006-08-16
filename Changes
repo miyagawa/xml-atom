@@ -2,6 +2,14 @@ $Id$
 
 Revision history for XML::Atom
 
+0.13  2005.07.19
+    - Added Atom 1.0 feed support for parsing
+    - Hacked Unicode entity in $content->body
+    - Added $entry->contributor
+    - $entry->contributor and $entry->person returns list in list context
+    - Added $content->lang and $content->base (xml:lang and xml:base)
+    - Make sure $feed->as_xml doesn't set utf-8 flag
+
 0.12  2005.06.07
     - Documentation fixes for XML::Atom::Server. Thanks to Tatsuhiko
       Miyagawa for the patch.

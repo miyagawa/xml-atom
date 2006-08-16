@@ -13,7 +13,6 @@ use Digest::SHA1 qw( sha1 );
 use MIME::Base64 qw( encode_base64 );
 use DateTime;
 
-use constant NS_ATOM => 'http://purl.org/atom/ns#';
 use constant NS_SOAP => 'http://schemas.xmlsoap.org/soap/envelope/';
 
 sub new {

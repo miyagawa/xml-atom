@@ -5,10 +5,8 @@ use strict;
 
 use XML::Atom;
 use base qw( XML::Atom::ErrorHandler );
-use XML::Atom::Util qw( remove_default_ns );
+use XML::Atom::Util qw( set_ns remove_default_ns hack_unicode_entity );
 use MIME::Base64 qw( encode_base64 decode_base64 );
-
-use constant NS => 'http://purl.org/atom/ns#';
 
 sub new {
     my $class = shift;
@@ -20,11 +18,12 @@ sub new {
 sub init {
     my $content = shift;
     my %param = @_ == 1 ? (Body => $_[0]) : @_;
+    $content->set_ns(\%param);
     my $elem;
     unless ($elem = $param{Elem}) {
         if (LIBXML) {
             my $doc = XML::LibXML::Document->createDocument('1.0', 'utf-8');
-            $elem = $doc->createElementNS(NS, 'content');
+            $elem = $doc->createElementNS($content->ns, 'content');
             $doc->setDocumentElement($elem);
         } else {
             $elem = XML::XPath::Node::Element->new('content');
@@ -40,6 +39,7 @@ sub init {
     $content;
 }
 
+sub ns   { $_[0]->{ns} }
 sub elem { $_[0]->{elem} }
 
 sub type {
@@ -54,6 +54,9 @@ sub mode {
     my $content = shift;
     $content->elem->getAttribute('mode');
 }
+
+sub lang { $_[0]->elem->getAttribute('lang') }
+sub base { $_[0]->elem->getAttribute('base') }
 
 sub body {
     my $content = shift;
@@ -128,8 +131,7 @@ sub body {
                 $content->{__body} = undef;
             }
             if ($] >= 5.008) {
-                require Encode;
-                Encode::_utf8_off($content->{__body});
+                $content->{__body} = hack_unicode_entity($content->{__body});
             }
         }
     }

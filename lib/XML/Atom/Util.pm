@@ -5,9 +5,35 @@ use strict;
 
 use XML::Atom;
 use vars qw( @EXPORT_OK @ISA );
+use Encode;
 use Exporter;
-@EXPORT_OK = qw( first nodelist textValue iso2dt encode_xml remove_default_ns );
+@EXPORT_OK = qw( set_ns hack_unicode_entity first nodelist textValue iso2dt encode_xml remove_default_ns );
 @ISA = qw( Exporter );
+
+our %NS_MAP = (
+    0.3 => 'http://purl.org/atom/ns#',
+    1.0 => 'http://www.w3.org/2005/Atom',
+);
+
+sub set_ns {
+    my $thing = shift;
+    my($param) = @_;
+    if ($param->{Namespace}) {
+        $thing->{ns} = $param->{Namespace};
+    } else  {
+        my $version = $param->{Version} || '0.3';
+        my $ns = $NS_MAP{$version} or $thing->error("Unknown version: $version");
+        $thing->{ns} = $ns;
+    }
+}
+
+sub hack_unicode_entity {
+    my $data = shift;
+    Encode::_utf8_on($data);
+    $data =~ s/&#x(\w{4});/chr(hex($1))/eg;
+    Encode::_utf8_off($data);
+    $data;
+}
 
 sub first {
     my @nodes = nodelist(@_);

@@ -7,7 +7,7 @@ use XML::Atom;
 use XML::Atom::Entry;
 use XML::Atom::Person;
 
-BEGIN { plan tests => 69 }
+BEGIN { plan tests => 71 }
 
 my $entry;
 
@@ -147,3 +147,8 @@ ok($entry->as_xml =~ m!<subject .*>Tech</subject>!);
 $entry->set($dc, "subject" => "Weblog");
 ok($entry->as_xml =~ m!<subject .*>Weblog</subject>!);
 ok($entry->as_xml !~ m!<subject .*>Tech</subject>!);
+
+# euc-jp feed
+$entry = XML::Atom::Entry->new('t/samples/entry-euc.xml');
+ok $entry->title, 'ゲストオーサー';
+ok $entry->content->body, '<p>日本語のフィード</p>';
