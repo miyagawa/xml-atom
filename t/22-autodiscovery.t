@@ -13,7 +13,8 @@ my $index = 'http://diveintomark.org/tests/client/autodiscovery/';
 my $ua = LWP::UserAgent->new;
 my $req = HTTP::Request->new(GET => $index);
 my $res = $ua->request($req);
-die "$index: ", $res->status_line unless $res->is_success;
+
+plan skip_all => "$index: ". $res->status_line unless $res->is_success;
 
 my $p = HTML::TokeParser->new(\$res->content);
 my $in_list = 0;
