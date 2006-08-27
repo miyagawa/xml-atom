@@ -204,6 +204,30 @@ sub attributes {
     @{ $class->__attributes };
 }
 
+sub mk_xml_attr_accessors {
+    my($class, @list) = @_;
+    no strict 'refs';
+    for my $attr (@list) {
+        (my $meth = $attr) =~ tr/\-/_/;
+        *{"${class}::$meth"} = sub {
+            my $obj = shift;
+            if (LIBXML) {
+                my $elem = $obj->elem;
+                if (@_) {
+                    $elem->setAttributeNS('http://www.w3.org/XML/1998/namespace',
+                                          $attr, $_[0]);
+                }
+                return $elem->getAttributeNS('http://www.w3.org/XML/1998/namespace', $attr);
+            } else {
+                if (@_) {
+                    $obj->elem->setAttribute("xml:$attr", $_[0]);
+                }
+                return $obj->elem->getAttribute("xml:$attr");
+            }
+        };
+    }
+}
+
 sub mk_object_accessor {
     my $class = shift;
     my($name, $ext_class) = @_;

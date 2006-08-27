@@ -4,7 +4,8 @@ package XML::Atom::Content;
 use strict;
 use base qw( XML::Atom::Base );
 
-__PACKAGE__->mk_attr_accessors(qw( type mode lang base ));
+__PACKAGE__->mk_attr_accessors(qw( type mode ));
+__PACKAGE__->mk_xml_attr_accessors(qw( lang base ));
 
 use Encode;
 use XML::Atom;

@@ -76,7 +76,7 @@ sub language {
             $elem->setAttributeNS('http://www.w3.org/XML/1998/namespace',
                 'lang', $_[0]);
         }
-        return $elem->getAttribute('lang');
+        return $elem->getAttributeNS('http://www.w3.org/XML/1998/namespace', 'lang');
     } else {
         if (@_) {
             $feed->elem->setAttribute('xml:lang', $_[0]);
