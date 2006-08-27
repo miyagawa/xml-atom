@@ -2,6 +2,10 @@ $Id$
 
 Revision history for XML::Atom
 
+0.23
+    * Fixed the method to get xml:lang and xml:base due to the
+      XML::LibXML 1.60 change which invalidated it.
+
 0.22  2006.07.24
     * Refactored internal element accessors by eating the new dog food
       mk_elem_accessors and mk_object_list_accessor.
