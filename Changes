@@ -2,7 +2,7 @@ $Id$
 
 Revision history for XML::Atom
 
-0.23
+0.23  2006.08.27
     * Fixed the method to get xml:lang and xml:base due to the
       XML::LibXML 1.60 change which invalidated it.
 
