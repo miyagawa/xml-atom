@@ -12,7 +12,7 @@ open my $fh, ">", $out;
 print $fh $feed->as_xml_utf8;
 close $fh;
 
-my $feed = XML::Atom::Feed->new($out);
+$feed = XML::Atom::Feed->new($out);
 is $feed->title, "Dicion\xc3\xa1rios";
 
 END { unlink $out if -e $out }
