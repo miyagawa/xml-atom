@@ -169,8 +169,10 @@ XML::Atom::Feed - Atom feed
     use XML::Atom::Entry;
     my $feed = XML::Atom::Feed->new;
     $feed->title('My Weblog');
+    $feed->id('tag:example.com,2006:feed-id');
     my $entry = XML::Atom::Entry->new;
     $entry->title('First Post');
+    $entry->id('tag:example.com,2006:entry-id');
     $entry->content('Post Body');
     $feed->add_entry($entry);
     $feed->add_entry($entry, { mode => 'insert' });
@@ -281,6 +283,13 @@ representing the author. For example:
     $author->name('Foo Bar');
     $author->email('foo@bar.com');
     $feed->author($author);
+
+=head2 $feed->id([ $id ])
+
+Returns an id for the feed. If I<$id> is supplied, set the id. When
+generating the new feed, it is your responsibility to generate unique
+ID for the feed and set to XML::Atom::Feed object. You can use I<http>
+permalink, I<tag> URI scheme or I<urn:uuid> for handy.
 
 =head1 UNICODE FLAGS
 

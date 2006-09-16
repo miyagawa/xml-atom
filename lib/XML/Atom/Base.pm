@@ -4,6 +4,7 @@ package XML::Atom::Base;
 use strict;
 use base qw( XML::Atom::ErrorHandler Class::Data::Inheritable );
 
+use Encode;
 use XML::Atom;
 use XML::Atom::Util qw( set_ns first nodelist childlist create_element remove_default_ns );
 
@@ -316,6 +317,11 @@ sub as_xml {
         return '<?xml version="1.0" encoding="utf-8"?>' . "\n" .
             $obj->elem->toString;
     }
+}
+
+sub as_xml_utf8 {
+    my $obj = shift;
+    Encode::encode_utf8($obj->as_xml);
 }
 
 1;
