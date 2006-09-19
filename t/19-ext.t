@@ -25,7 +25,7 @@ $foo2 = $feed->foo2;
 isa_ok $foo2, 'XML::Atom::Ext::Foo';
 is $foo2->bar, 1;
 
-like $feed->as_xml, qr/<(?:\w+:)foo xmlns="http:\/\/www.example.com\/ns\/">/;
+like $feed->as_xml, qr/<foo xmlns="http:\/\/www.example.com\/ns\/">/;
 
 package XML::Atom::Ext::Foo;
 use strict;

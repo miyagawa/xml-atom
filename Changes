@@ -6,6 +6,9 @@ Revision history for XML::Atom
     * Updated document to mention that ID creation is user's responsibility
     * Added $feed->as_xml_utf8 which always returns UTF-8 bytes string, rather than UTF-8 flagged one.
       This addresses annoying issues with UTF-8 vs. latin-1 (Thanks to Rui Vilela #21191)
+    * Better fix for the hateful default: prefix issue in libxml2; now we
+      remove the default\d* prefix on any nodes and set the proper namespace
+      URI.
 
 0.23  2006.08.27
     * Fixed the method to get xml:lang and xml:base due to the
