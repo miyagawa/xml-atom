@@ -58,9 +58,9 @@ is $content->body, "My name is \xe5\xae\xae\xe5\xb7\x9d.";
 
 $content = XML::Atom::Content->new;
 $content->type('text/plain');
-eval { $content->body("Non-printable: " . chr(578)) };
+eval { $content->body("Non-printable: " . chr(0x1034F)) };
 is $content->mode, 'base64';
-is $content->body, un_utf8("Non-printable: " . chr(578));
+is $content->body, un_utf8("Non-printable: " . chr(0x1034F));
 
 # 1.0 with xhtml
 $content = XML::Atom::Content->new(Version => 1.0);
