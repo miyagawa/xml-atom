@@ -2,10 +2,17 @@
 
 use strict;
 
-use Test::More tests => 71;
+use t::TestLib;
+use Test::More;
 use XML::Atom;
 use XML::Atom::Entry;
 use XML::Atom::Person;
+
+unless ( xmllib_support_encoding('euc-jp') ){
+    plan skip_all => 'euc-jp is not supported on your XML library';
+}
+
+plan tests => 71;
 
 my $entry;
 
