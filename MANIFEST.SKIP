@@ -15,3 +15,4 @@
 \.rej$
 \.tar$
 \.orig$
+\.patch$
