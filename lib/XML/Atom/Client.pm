@@ -218,6 +218,7 @@ sub _utf8_off {
 
 package LWP::UserAgent::AtomClient;
 use strict;
+use Scalar::Util;
 
 use base qw( LWP::UserAgent );
 
@@ -226,6 +227,7 @@ sub new {
     my($class, $client) = @_;
     my $ua = $class->SUPER::new;
     $ClientOf{$ua} = $client;
+    Scalar::Util::weaken($ClientOf{$ua});
     $ua;
 }
 
