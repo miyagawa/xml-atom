@@ -2,6 +2,10 @@ $Id$
 
 Revision history for XML::Atom
 
+0.25  2006.11.30
+    * Fixed memory leaks in XML::Atom::Client
+      (Reported by Brian Cassidy)
+
 0.24  2006.11.25
     * Updated document to mention that ID creation is user's responsibility
     * Added $feed->as_xml_utf8 which always returns UTF-8 bytes string, rather than UTF-8 flagged one.

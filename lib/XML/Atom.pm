@@ -3,6 +3,8 @@
 package XML::Atom;
 use strict;
 
+our $VERSION = '0.25';
+
 BEGIN {
     @XML::Atom::EXPORT = qw( LIBXML );
     if (eval { require XML::LibXML }) {
@@ -27,8 +29,6 @@ BEGIN {
 }
 
 use base qw( XML::Atom::ErrorHandler Exporter );
-
-our $VERSION = '0.24';
 
 package XML::Atom::Namespace;
 use strict;
