@@ -1,11 +1,9 @@
-Build.PL
 Changes
 inc/ExtUtils/AutoInstall.pm
 inc/Module/AutoInstall.pm
 inc/Module/Install.pm
 inc/Module/Install/AutoInstall.pm
 inc/Module/Install/Base.pm
-inc/Module/Install/Build.pm
 inc/Module/Install/Can.pm
 inc/Module/Install/Fetch.pm
 inc/Module/Install/Include.pm
@@ -59,3 +57,4 @@ t/samples/lifeblog-atom.xml
 t/samples/me.jpg
 t/samples/vox.xml
 t/TestLib.pm
+t/28-ext.t

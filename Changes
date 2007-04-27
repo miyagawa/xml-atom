@@ -2,6 +2,13 @@ $Id$
 
 Revision history for XML::Atom
 
+0.25_01 2007.04.27
+
+    * Fixed XML::Atom::Base element accessor to work with attributes
+      (Patch from LTjake and Jshirley for OpenSearch extension)
+    * Make XML::Atom::Link easily subclassable
+      (Patch from Simon Wistow for Google Calendar support)
+
 0.25  2006.11.30
     * Fixed memory leaks in XML::Atom::Client
       (Reported by Brian Cassidy)
