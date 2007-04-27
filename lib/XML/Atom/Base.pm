@@ -28,7 +28,20 @@ sub init {
     unless ($elem = $param{Elem}) {
         if (LIBXML) {
             my $doc = XML::LibXML::Document->createDocument('1.0', 'utf-8');
-            $elem = $doc->createElementNS($obj->ns, $obj->element_name);
+            my $ns = $obj->ns;
+            my ($ns_uri, $ns_prefix);
+            if ( ref $ns and $ns->isa('XML::Atom::Namespace') ) {
+                $ns_uri     = $ns->{uri};
+                $ns_prefix  = $ns->{prefix};
+            } else {
+                $ns_uri = $ns;
+            }
+            if ( $ns_uri and $ns_prefix ) {
+                $elem = $doc->createElement($obj->element_name);
+                $elem->setNamespace( $ns_uri, $ns_prefix, 1 );
+            } else {
+                $elem = $doc->createElementNS($obj->ns, $obj->element_name);
+            }
             $doc->setDocumentElement($elem);
         } else {
             $elem = XML::XPath::Node::Element->new($obj->element_name);
@@ -162,16 +175,35 @@ sub get_object {
 
 sub mk_elem_accessors {
     my $class = shift;
-    my(@list) = @_;
+    my (@list) = @_;
+    my $override_ns;
+
+    if ( ref $list[-1] ) {
+        my $ns_list = pop @list;
+        if ( ref $ns_list eq 'ARRAY' ) {
+            $ns_list = $ns_list->[0];
+        }
+        if ( ref($ns_list) =~ /Namespace/ ) {
+            $override_ns = $ns_list;
+        } else {
+            if ( ref $ns_list eq 'HASH' ) {
+                $override_ns = XML::Atom::Namespace->new(%$ns_list);
+            }
+            elsif ( not ref $ns_list and $ns_list ) {
+                $override_ns = $ns_list;
+            }
+        } 
+    }
+
     no strict 'refs';
-    for my $elem (@list) {
+    for my $elem ( @list ) {
         (my $meth = $elem) =~ tr/\-/_/;
         *{"${class}::$meth"} = sub {
             my $obj = shift;
             if (@_) {
-                return $obj->set($obj->ns, $elem, $_[0]);
+                return $obj->set( $override_ns || $obj->ns, $elem, $_[0]);
             } else {
-                return $obj->get($obj->ns, $elem);
+                return $obj->get( $override_ns || $obj->ns, $elem);
             }
         };
     }
@@ -293,7 +325,7 @@ sub mk_object_list_accessor {
         my($stuff) = @_;
 
         my $ns_uri = $ext_class->element_ns || $obj->ns;
-        my $elem = ref $stuff eq $ext_class ?
+        my $elem = (ref $stuff && UNIVERSAL::isa($stuff, $ext_class)) ?
             $stuff->elem : create_element($ns_uri, $name);
         $obj->elem->appendChild($elem);
 
