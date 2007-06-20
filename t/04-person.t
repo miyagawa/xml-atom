@@ -22,5 +22,5 @@ is $person->email, 'foo@bar.com';
 my $xml = $person->as_xml;
 like $xml, qr/^<\?xml version="1.0" encoding="utf-8"\?>/;
 like $xml, qr/<author xmlns="http:\/\/purl.org\/atom\/ns#">/;
-like $xml, qr/<name xmlns="http:\/\/purl.org\/atom\/ns#">Baz Quux<\/name>/;
-like $xml, qr/<email xmlns="http:\/\/purl.org\/atom\/ns#">foo\@bar.com<\/email>/;
+like $xml, qr/<name(?: xmlns="http:\/\/purl.org\/atom\/ns#")?>Baz Quux<\/name>/;
+like $xml, qr/<email(?: xmlns="http:\/\/purl.org\/atom\/ns#")?>foo\@bar.com<\/email>/;

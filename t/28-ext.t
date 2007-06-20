@@ -67,7 +67,7 @@ like( $xml, qr{<testext:link xmlns:testext="http://test.com/-/spec/test/0.1/" hr
 
 like( $xml, qr{<testext:startIndex xmlns:testext="http://test.com/-/spec/test/0.1/">2</testext:startIndex>}, "ext method match");
 
-like( $xml, qr{<link xmlns="http://purl.org/atom/ns#" href="http://www.legacy_link.com"/>}, "standard link match");
+like( $xml, qr{<link(?: xmlns="http://purl.org/atom/ns#")? href="http://www.legacy_link.com"/>}, "standard link match");
 
 
 __END__

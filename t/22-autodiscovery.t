@@ -38,8 +38,10 @@ for my $uri (@tests) {
     my $feed = XML::Atom::Feed->new(URI->new($feeds[0]));
     ok($feed, "$uri has a valid feed");
     my $backlink;
-    for my $link ($feed->link) {
-        $backlink = $link->href if $link->rel eq 'alternate';
+    if ($feed) {
+        for my $link ($feed->link) {
+            $backlink = $link->href if $link->rel eq 'alternate';
+        }
     }
     is($backlink, $uri, "$uri retrieved correct feed");
 }

@@ -11,7 +11,7 @@ isa_ok $foo, 'XML::Atom::Ext::Foo';
 $foo->bar(1);
 is $foo->bar, 1;
 like $foo->as_xml, qr/<foo xmlns="http:\/\/www.example.com\/ns\/">/;
-like $foo->as_xml, qr/<bar xmlns="http:\/\/www.example.com\/ns\/">1<\/bar>/;
+like $foo->as_xml, qr/<bar(?: xmlns="http:\/\/www.example.com\/ns\/")?>1<\/bar>/;
 
 my $feed = XML::Atom::Feed->new;
 $feed->foo($foo);
