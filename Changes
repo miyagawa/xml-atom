@@ -2,6 +2,9 @@ $Id$
 
 Revision history for XML::Atom
 
+0.26 2007.09.15
+    * This be 0.26
+
 0.25_02  2007.06.20
     * Fixed tests that fail with newer libxml (Thanks to knagano)
 
