@@ -2,6 +2,9 @@ $Id$
 
 Revision history for XML::Atom
 
+0.27 2007.09.15
+    * Fixed $feed->as_xml_utf8 to work with latest XML::LibXML
+
 0.26 2007.09.15
     * This be 0.26
 

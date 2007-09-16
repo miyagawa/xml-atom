@@ -6,6 +6,7 @@ use XML::Atom::Feed;
 my $feed = XML::Atom::Feed->new(Version => 1.0);
 $feed->version; # 1.0
 $feed->title("Dicion\xc3\xa1rios");
+is $feed->title, "Dicion\xc3\xa1rios";
 
 my $out = "$FindBin::Bin/utf8-create.xml";
 open my $fh, ">", $out;

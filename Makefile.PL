@@ -19,7 +19,7 @@ requires('Class::Data::Inheritable');
 features(
     'Faster XML parsing with libxml' => [
         -default => 1,
-        recommends('XML::LibXML' => 1.54),
+        recommends('XML::LibXML' => 1.64),
     ],
     'Pure perl XML parsing with XML::XPath' => [
         -default => 0,

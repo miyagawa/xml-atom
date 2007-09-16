@@ -353,7 +353,11 @@ sub as_xml {
 
 sub as_xml_utf8 {
     my $obj = shift;
-    Encode::encode_utf8($obj->as_xml);
+    my $xml = $obj->as_xml;
+    if (utf8::is_utf8($xml)) {
+        return Encode::encode_utf8($xml);
+    }
+    return $xml;
 }
 
 1;
