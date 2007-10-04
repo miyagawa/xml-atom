@@ -15,12 +15,9 @@ include('ExtUtils::AutoInstall');
 requires('MIME::Base64');
 requires('URI');
 requires('Class::Data::Inheritable');
+requires('XML::LibXML', 1.64);
 
 features(
-    'Faster XML parsing with libxml' => [
-        -default => 1,
-        recommends('XML::LibXML' => 1.64),
-    ],
     'Pure perl XML parsing with XML::XPath' => [
         -default => 0,
         recommends('XML::XPath'),
