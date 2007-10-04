@@ -6,7 +6,7 @@ use base qw( XML::Atom::Base );
 
 use XML::Atom;
 use base qw( XML::Atom::ErrorHandler );
-use XML::Atom::Util qw( first nodelist childlist remove_default_ns create_element );
+use XML::Atom::Util qw( first nodelist childlist create_element );
 use XML::Atom::Category;
 use XML::Atom::Link;
 use LWP::UserAgent;

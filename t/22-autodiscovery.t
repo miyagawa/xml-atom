@@ -14,7 +14,7 @@ my $ua = LWP::UserAgent->new;
 my $req = HTTP::Request->new(GET => $index);
 my $res = $ua->request($req);
 
-plan skip_all => "$index: ". $res->status_line unless $res->is_success;
+plan skip_all => "$index: ". $res->status_line unless $res->is_success && $ENV{TEST_ALL};
 
 my $p = HTML::TokeParser->new(\$res->content);
 my $in_list = 0;
