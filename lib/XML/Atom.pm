@@ -3,7 +3,7 @@
 package XML::Atom;
 use strict;
 
-our $VERSION = '0.27';
+our $VERSION = '0.27_01';
 
 BEGIN {
     @XML::Atom::EXPORT = qw( LIBXML );

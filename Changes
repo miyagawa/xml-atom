@@ -2,6 +2,9 @@ $Id$
 
 Revision history for XML::Atom
 
+0.27_01 2007.10.04
+    * Removes most of hacks to deal with LibXML insane unicode stuff which are fixed with 1.64
+
 0.27 2007.09.15
     * Fixed $feed->as_xml_utf8 to work with latest XML::LibXML
 
