@@ -1,7 +1,15 @@
 use strict;
 use warnings;
+use Test::More;
+
+BEGIN {
+    unless (eval { require DateTime }) {
+        plan skip_all => 'DateTime is required for tests';
+    }
+}
+
+plan tests => 1;
 use XML::Atom::Client;
-use Test::More tests => 1;
 
 my $foo;
 no warnings 'redefine';
