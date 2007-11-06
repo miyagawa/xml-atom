@@ -2,7 +2,7 @@
 
 use strict;
 use FindBin;
-use Test::More tests => 9;
+use Test::More tests => 16;
 
 use XML::Atom::Feed;
 
@@ -27,6 +27,29 @@ is $foo2->bar, 1;
 
 like $feed->as_xml, qr/<foo xmlns="http:\/\/www.example.com\/ns\/">/;
 
+{
+    my $elem = XML::Atom::Ext::WithNS->new;
+    isa_ok $elem, 'XML::Atom::Ext::WithNS';
+    $elem->baz(1);
+    is $elem->baz, 1;
+    like $elem->as_xml, qr{<withns:with_ns.+xmlns:withns="http://example.com/withns/"};
+
+    $feed->add_with_ns( $elem );
+    like $feed->as_xml, qr{<withns:with_ns.+xmlns:withns="http://example.com/withns/"};
+}
+
+{
+    my $feed = XML::Atom::Feed->new( \'<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://purl.org/atom/ns#">
+  <withns:with_ns xmlns:withns="http://example.com/withns/" baz="1"/>
+</feed>' );
+
+    my( @elems ) = $feed->with_ns;
+    is scalar @elems, 1;
+    isa_ok $elems[ 0 ], 'XML::Atom::Ext::WithNS';
+    is $elems[ 0 ]->baz, 1 ;
+}
+
 package XML::Atom::Ext::Foo;
 use strict;
 use base qw( XML::Atom::Base );
@@ -39,3 +62,23 @@ BEGIN {
 
 sub element_name { 'foo' }
 sub element_ns   { 'http://www.example.com/ns/' }
+
+
+package XML::Atom::Ext::WithNS;
+
+use strict;
+use warnings;
+
+use base qw( XML::Atom::Base );
+
+BEGIN {
+    __PACKAGE__->mk_attr_accessors( 'baz' );
+    XML::Atom::Feed->mk_object_list_accessor( with_ns => __PACKAGE__ );
+}
+
+sub element_name { return 'with_ns' }
+
+sub element_ns {
+    return XML::Atom::Namespace->new( "withns" => q{http://example.com/withns/} );
+}
+

@@ -168,7 +168,8 @@ sub set_attr {
 sub get_object {
     my $obj = shift;
     my($ns, $name, $class) = @_;
-    my @elem = childlist($obj->elem, $ns, $name) or return;
+    my $ns_uri = ref($ns) eq 'XML::Atom::Namespace' ? $ns->{uri} : $ns;
+    my @elem = childlist($obj->elem, $ns_uri, $name) or return;
     my @obj = map { $class->new( Elem => $_, Namespace => $ns ) } @elem;
     return wantarray ? @obj : $obj[0];
 }

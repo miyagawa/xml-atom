@@ -2,6 +2,10 @@ $Id$
 
 Revision history for XML::Atom
 
+0.28  2007.11.06
+    * Fixed Namespace handling in extensions so that both URL and NS object work
+      (Thanks to Brian Cassidy)
+
 0.27_01 2007.10.04
     * Removes most of hacks to deal with LibXML insane unicode stuff which are fixed with 1.64
 
