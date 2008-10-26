@@ -157,6 +157,9 @@ $entry->set($dc, "subject" => "Weblog");
 like $entry->as_xml, qr/<dc:subject .*>Weblog<\/dc:subject>/;
 
 # euc-jp feed
+SKIP: {
+skip "Skipping UTF-8 tests since it depends on libxml", 2;
 $entry = XML::Atom::Entry->new('t/samples/entry-euc.xml');
 is $entry->title, 'ゲストオーサー';
 is $entry->content->body, '<p>日本語のフィード</p>';
+}

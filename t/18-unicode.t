@@ -3,7 +3,7 @@
 use strict;
 use encoding "utf-8";
 
-use Test::More 'no_plan';
+use Test::More skip_all => "Skipping Unicode test since it depends on LibXML";
 use XML::Atom;
 use XML::Atom::Entry;
 use XML::Atom::Person;
