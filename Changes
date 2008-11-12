@@ -2,6 +2,11 @@ $Id$
 
 Revision history for XML::Atom
 
+0.30  2008.11.12
+    * hopefully fix a bug where xml:base returns an empty string
+      e.g. http://www.nntp.perl.org/group/perl.cpan.testers/2008/11/msg2595696.html
+      (Thanks to tokuhirom http://d.hatena.ne.jp/tokuhirom/20081110/1226280757)
+
 0.29  2008.10.25
     * Skips Unicode tests since it doesn't pass with some libxml versions (and it's not actually a bug)
 
