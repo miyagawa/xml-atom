@@ -343,7 +343,7 @@ sub as_xml {
     my $obj = shift;
     if (LIBXML) {
         my $doc = XML::LibXML::Document->new('1.0', 'utf-8');
-        $doc->setDocumentElement($obj->elem);
+        $doc->setDocumentElement($obj->elem->cloneNode(1));
         return $doc->toString(1);
     } else {
         return '<?xml version="1.0" encoding="utf-8"?>' . "\n" .
