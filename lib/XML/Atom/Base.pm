@@ -64,6 +64,15 @@ sub version {
     XML::Atom::Util::ns_to_version($atom->ns);
 }
 
+sub content_type {
+    my $atom = shift;
+    if ($atom->version >= 1.0) {
+        return "application/atom+xml";
+    } else {
+        return "application/x.atom+xml";
+    }
+}
+
 sub get {
     my $obj = shift;
     my($ns, $name) = @_;

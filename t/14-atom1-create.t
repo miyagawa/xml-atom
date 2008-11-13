@@ -3,7 +3,7 @@ use strict;
 use XML::Atom;
 use XML::Atom::Feed;
 use XML::Atom::Link;
-use Test::More tests => 9;
+use Test::More tests => 10;
 
 my $feed = XML::Atom::Feed->new(Version => 1.0);
 $feed->title("foo bar");
@@ -45,4 +45,6 @@ $feed = XML::Atom::Feed->new(Stream => \$xml);
 is $feed->version, "1.0";
 is $feed->title, "foo bar";
 is $feed->link->href, 'http://www.example.com/';
+
+is $feed->content_type, "application/atom+xml";
 
