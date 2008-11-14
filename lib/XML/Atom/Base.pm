@@ -260,7 +260,7 @@ sub mk_xml_attr_accessors {
                     $elem->setAttributeNS('http://www.w3.org/XML/1998/namespace',
                                           $attr, $_[0]);
                 }
-                return $elem->getAttributeNS('http://www.w3.org/XML/1998/namespace', $attr);
+                return $elem->getAttribute("xml:$attr");
             } else {
                 if (@_) {
                     $obj->elem->setAttribute("xml:$attr", $_[0]);
