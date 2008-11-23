@@ -2,6 +2,10 @@ $Id$
 
 Revision history for XML::Atom
 
+0.32  2008.11.23
+    * Added base and lang to Entry and Feed object. Fixed xml:base attributes.
+      (Simon Wistow)
+
 0.31  2008.11.13
     * Update Content-Type in XML::Atom::Client when the entity's version >= 1.0
       (Thanks to David Steinbrunner RT 39801)
