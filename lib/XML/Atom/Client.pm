@@ -173,10 +173,12 @@ SOAP
         $req->method('POST');
         $req->content_type('text/xml');
     } else {
-        $req->header('X-WSSE', sprintf
-          qq(UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"),
-          $client->username || '', $digest, $nonce_enc, $now);
-        $req->header('Authorization', 'WSSE profile="UsernameToken"');
+        if ($client->username) {
+            $req->header('X-WSSE', sprintf
+              qq(UsernameToken Username="%s", PasswordDigest="%s", Nonce="%s", Created="%s"),
+              $client->username || '', $digest, $nonce_enc, $now);
+            $req->header('Authorization', 'WSSE profile="UsernameToken"');
+        }
     }
 }
 
