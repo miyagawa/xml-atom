@@ -2,7 +2,7 @@ $Id$
 
 Revision history for XML::Atom
 
-0.33  2008.01.06
+0.33  2009.01.06
     * Client: Send WSSE auth header only when username is set
       (Thanks to David Bourget at http://rt.cpan.org/Public/Bug/Display.html?id=42201)
 
