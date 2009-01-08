@@ -48,6 +48,7 @@ t/24-bad-content.t
 t/25-utf8-create.t
 t/27-client-leaks.t
 t/28-ext.t
+t/29-source.t
 t/samples/atom-1.0.xml
 t/samples/entry-euc.xml
 t/samples/entry-full.xml
@@ -57,4 +58,5 @@ t/samples/feed.xml
 t/samples/lifeblog-atom.xml
 t/samples/me.jpg
 t/samples/vox.xml
+t/samples/source.xml
 t/TestLib.pm
