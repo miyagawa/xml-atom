@@ -5,3 +5,4 @@ steps = FindVersion, ChangeVersion, CheckChangeLog, DistTest, Commit, Tag, MakeD
 #svn.tagpattern = ShipIt-%v
 
 #CheckChangeLog.files = ChangeLog
+git.push_to = origin

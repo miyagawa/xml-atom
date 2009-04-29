@@ -16,3 +16,4 @@
 \.tar$
 \.orig$
 \.patch$
+\.git

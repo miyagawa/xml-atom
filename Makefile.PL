@@ -8,6 +8,7 @@ author('Benjamin Trott <cpan@stupidfool.org>');
 version_from('lib/XML/Atom.pm');
 license('perl');
 no_index(directory => 't');
+auto_set_repository;
 sign(0);
 
 include('ExtUtils::AutoInstall');
