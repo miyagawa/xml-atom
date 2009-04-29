@@ -9,6 +9,7 @@ inc/Module/Install/Fetch.pm
 inc/Module/Install/Include.pm
 inc/Module/Install/Makefile.pm
 inc/Module/Install/Metadata.pm
+inc/Module/Install/Repository.pm
 inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 lib/XML/Atom.pm
@@ -57,6 +58,6 @@ t/samples/entry-utf8.xml
 t/samples/feed.xml
 t/samples/lifeblog-atom.xml
 t/samples/me.jpg
-t/samples/vox.xml
 t/samples/source.xml
+t/samples/vox.xml
 t/TestLib.pm
