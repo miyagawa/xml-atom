@@ -1,0 +1,14 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+<title>Testing atom:source</title>
+
+<entry>
+<title>Example Entry</title>
+<source>
+<title>Frank's JiveBlog</title>
+<link rel="alternate" type="text/html" href="http://jiveblog.example.com/frank" />
+</source>
+</entry>
+
+</feed>
+
