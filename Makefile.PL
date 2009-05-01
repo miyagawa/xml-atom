@@ -2,16 +2,9 @@
 
 use inc::Module::Install;
 
-name('XML-Atom');
-abstract('Atom API and Feed Support');
-author('Benjamin Trott <cpan@stupidfool.org>');
-version_from('lib/XML/Atom.pm');
-license('perl');
-no_index(directory => 't');
+name 'XML-Atom';
+all_from 'lib/XML/Atom.pm';
 auto_set_repository;
-sign(0);
-
-include('ExtUtils::AutoInstall');
 
 requires('MIME::Base64');
 requires('URI');
@@ -37,6 +30,5 @@ features(
 );
 
 auto_include();
-auto_install();
 
 &WriteAll;
