@@ -2,6 +2,9 @@ $Id$
 
 Revision history for XML::Atom
 
+0.35  2009.05.01
+    * reworked Module::Install stuff to remove junks
+
 0.34  2009.04.29
     * Fixed $entry->source support (Martin Atkins)
 
