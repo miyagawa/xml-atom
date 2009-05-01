@@ -70,13 +70,12 @@ API.
 I<XML::Atom> is free software; you may redistribute it and/or modify it
 under the same terms as Perl itself.
 
-=head1 AUTHOR & COPYRIGHT
+=head1 AUTHOR
 
-Except where otherwise noted, I<XML::Atom> is Copyright 2003-2005
-Benjamin Trott, cpan@stupidfool.org. All rights reserved.
+Benjamin Trott, Tatsuhiko Miyagawa
 
-=head1 CO-MAINTAINER
+=head1 COPYRIGHT
 
-Tatsuhiko Miyagawa E<lt>miyagawa@bulknews.netE<gt>
+All rights reserved.
 
 =cut
