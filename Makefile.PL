@@ -1,6 +1,7 @@
 # $Id$
 
 use inc::Module::Install;
+use 5.008;
 
 name 'XML-Atom';
 all_from 'lib/XML/Atom.pm';
@@ -14,7 +15,6 @@ requires('LWP::UserAgent');
 requires('Digest::SHA1');
 requires('DateTime');
 requires('XML::LibXML', 1.69);
-requires('Encode');
 
 features(
     'Pure perl XML parsing with XML::XPath' => [
