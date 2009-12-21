@@ -13,7 +13,7 @@ requires('XML::XPath');
 requires('LWP::UserAgent');
 requires('Digest::SHA1');
 requires('DateTime');
-requires('XML::LibXML', 1.64);
+requires('XML::LibXML', 1.69);
 requires('Encode');
 
 features(
