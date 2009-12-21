@@ -9,6 +9,10 @@ auto_set_repository;
 requires('MIME::Base64');
 requires('URI');
 requires('Class::Data::Inheritable');
+requires('XML::XPath');
+requires('LWP::UserAgent');
+requires('Digest::SHA1');
+requires('DateTime');
 requires('XML::LibXML', 1.64);
 
 features(
@@ -20,8 +24,6 @@ features(
         -default => 1,
         LWP => 0,
         'LWP::Authen::Wsse' => 0,
-        'Digest::SHA1' => 0,
-        'DateTime' => 0,
     ],
     'Feed and API Auto-discovery' => [
         -default => 1,
