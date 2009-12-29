@@ -2,6 +2,9 @@ $Id$
 
 Revision history for XML::Atom
 
+0.37  2009.12.29
+    * Fixed accessors for source elements (Vince Veselosky)
+
 0.36  2009.12.21
     * Fixed various dependency issues RT #23538, #34481, #52519, #41058 (Tomas Doran)
 
