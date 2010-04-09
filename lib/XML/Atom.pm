@@ -7,13 +7,19 @@ use 5.008_001;
 our $VERSION = '0.37';
 
 BEGIN {
-    @XML::Atom::EXPORT = qw( LIBXML );
+    @XML::Atom::EXPORT = qw( LIBXML DATETIME);
     if (eval { require XML::LibXML }) {
         *{XML::Atom::LIBXML} = sub() {1};
     } else {
         require XML::XPath;
         *{XML::Atom::LIBXML} = sub() {0};
     }
+    if (eval { require DateTime::Format::Atom }) {
+        *{XML::Atom::DATETIME} = sub() {1};
+    } else {
+        *{XML::Atom::DATETIME} = sub() {0};
+    }
+    
     local $^W = 0;
     *XML::XPath::Function::namespace_uri = sub {
         my $self = shift;

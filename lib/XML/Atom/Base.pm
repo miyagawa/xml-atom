@@ -127,6 +127,8 @@ sub set {
                 $elem->appendAttribute($attr);
             }
         }
+    } elsif (DATETIME && UNIVERSAL::isa($val, "DateTime")) {
+        return $obj->set($ns, $name, DateTime::Format::Atom->format_datetime($val), $attr, $add);
     } else {
         if (LIBXML) {
             $elem->appendChild(XML::LibXML::Text->new($val));
