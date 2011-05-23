@@ -147,7 +147,7 @@ sub _is_printable {
           ? $data
           : eval { Encode::decode("utf-8", $data, Encode::FB_CROAK) } );
 
-    return ! $@ && $decoded =~ /^\p{IsPrint}*$/;
+    return ! $@ && $decoded =~ /^[\p{IsPrint}\s]*$/;
 }
 
 1;
