@@ -2,6 +2,10 @@ $Id$
 
 Revision history for XML::Atom
 
+0.38  2011.05.22
+    * Fixed a bug where content with newlines wasn't encoded in perl >= 5.12 (emasaka)
+      https://rt.cpan.org/Public/Bug/Display.html?id=61637
+
 0.37  2009.12.29
     * Fixed accessors for source elements (Vince Veselosky)
 
