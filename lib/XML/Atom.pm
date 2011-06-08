@@ -35,6 +35,26 @@ BEGIN {
     $XML::Atom::DefaultVersion = 0.3;
 }
 
+sub libxml_parser {
+    ## uses old XML::LibXML < 1.70 interface for compat reasons
+    return XML::LibXML->new(
+        #no_network      => 1, # v1.63+
+        expand_xinclude => 0,
+        expand_entities => 1,
+        load_ext_dtd    => 0,
+        ext_ent_handler => sub { warn "External entities disabled."; '' },
+    );
+}
+
+sub expat_parser {
+    return XML::Parser->new(
+        Handlers => {
+            ExternEnt => sub { warn "External Entities disabled."; '' },
+            ExternEntFin => sub {},
+        },
+    );
+}
+
 use base qw( XML::Atom::ErrorHandler Exporter );
 
 package XML::Atom::Namespace;
