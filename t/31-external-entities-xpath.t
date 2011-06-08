@@ -52,7 +52,6 @@ EOX
 
 ## Sane default
 {
-    $DB::single = 1;
     my $entry = XML::Atom::Entry->new(Stream => \$xml);
     is $entry->title, "Guest Author", "got title";
     my $content = $entry->content->body;

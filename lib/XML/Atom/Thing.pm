@@ -59,7 +59,6 @@ sub init_xpath {
         } else {
             $xp = XML::XPath->new(filename => $stream, parser => $parser);
         }
-        $DB::single = 1;
         my $set = $xp->find('/' . $elem_name);
         unless ($set && $set->size) {
             $set = $xp->find('/');
