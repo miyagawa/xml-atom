@@ -49,6 +49,8 @@ t/27-client-leaks.t
 t/28-ext.t
 t/29-source.t
 t/30-datetime-stringification.t
+t/31-external-entities-libxml.t
+t/31-external-entities-xpath.t
 t/samples/atom-1.0.xml
 t/samples/entry-euc.xml
 t/samples/entry-full.xml

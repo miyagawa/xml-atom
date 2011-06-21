@@ -2,6 +2,9 @@ $Id$
 
 Revision history for XML::Atom
 
+0.39  2011.06.20
+    * Disabled external entities and network to avoid possible security flaw (yannk)
+
 0.38  2011.05.22
     * Fixed a bug where content with newlines wasn't encoded in perl >= 5.12 (emasaka)
       https://rt.cpan.org/Public/Bug/Display.html?id=61637
