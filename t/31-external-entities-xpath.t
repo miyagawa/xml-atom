@@ -14,6 +14,8 @@ BEGIN {
     require XML::Atom;
     if (XML::Atom->LIBXML) {
         no strict 'refs';
+        # Silence the Constant subroutine redefined warning.
+        local $SIG{__WARN__} = sub {}; 
         diag "XPath Override in place";
         *{XML::Atom::LIBXML} = sub() {0};
     }
