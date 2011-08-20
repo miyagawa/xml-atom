@@ -81,8 +81,8 @@ sub version {
 
 sub entries_libxml {
     my $feed = shift;
-    my @res = $feed->elem->getElementsByTagNameNS($feed->ns, 'entry') or return;
     my @entries;
+    my @res = $feed->elem->getElementsByTagNameNS($feed->ns, 'entry');
     for my $res (@res) {
         my $entry = XML::Atom::Entry->new(Elem => $res->cloneNode(1));
         push @entries, $entry;
