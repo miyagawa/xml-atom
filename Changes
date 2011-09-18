@@ -2,6 +2,10 @@ $Id$
 
 Revision history for XML::Atom
 
+0.40  2011.09.18
+    * Fixed tests for Windows (wchristian)
+    * use all upper case UTF-8 (tsgit)
+
 0.39  2011.06.20
     * Disabled external entities and network to avoid possible security flaw (yannk)
 
