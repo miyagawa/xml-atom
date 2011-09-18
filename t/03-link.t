@@ -27,7 +27,7 @@ $link->type('text/html');
 is $link->type, 'text/html';
 
 my $xml = $link->as_xml;
-like $xml, qr/^<\?xml version="1.0" encoding="utf-8"\?>/;
+like $xml, qr/^<\?xml version="1.0" encoding="UTF-8"\?>/;
 like $xml, qr/<link xmlns="http:\/\/purl.org\/atom\/ns#"/;
 like $xml, qr/title="This is a test."/;
 like $xml, qr/rel="alternate"/;
