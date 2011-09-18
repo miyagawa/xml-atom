@@ -4,6 +4,7 @@ use Test::More;
 use XML::Atom::Entry;
 use FindBin;
 my $filepath = "$FindBin::Bin/samples/entry-ns.xml";
+$filepath = "/$filepath" if $filepath !~ m@^/@;
 
 BEGIN {
     unless (eval { require XML::LibXML }) {

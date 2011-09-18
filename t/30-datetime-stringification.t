@@ -4,7 +4,7 @@ use Test::More;
 
 BEGIN {
     unless (eval { require DateTime } and eval { require DateTime::Format::Atom }) {
-        plan skip_all => 'DateTime is required for tests';
+        plan skip_all => 'DateTime and DateTime::Format::Atom are required for tests';
     }
 }
 
