@@ -14,6 +14,7 @@ requires('XML::XPath');
 requires('LWP::UserAgent');
 requires('Digest::SHA1');
 requires('DateTime');
+requires('DateTime::TimeZone');
 requires('XML::LibXML', 1.69);
 
 features(
