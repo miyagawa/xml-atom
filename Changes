@@ -2,6 +2,9 @@ $Id$
 
 Revision history for XML::Atom
 
+0.41  2011.09.26
+    * Added a dependency to DateTime::TimeZone (leto)
+
 0.40  2011.09.18
     * Fixed tests for Windows (wchristian)
     * use all upper case UTF-8 (tsgit)
