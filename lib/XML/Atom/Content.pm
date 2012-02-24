@@ -98,6 +98,7 @@ sub body {
                   : $content->type eq 'html'          ? 'escaped'
                   : $content->type eq 'text'          ? 'escaped'
                   : $content->type =~ m!^text/!       ? 'escaped'
+                  : $content->type =~ m!json|ya?ml!   ? 'escaped'
                   :                                     'base64';
             }
 
