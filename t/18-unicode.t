@@ -1,7 +1,7 @@
 # $Id$
 
 use strict;
-use encoding "utf-8";
+use utf8;
 
 use Test::More skip_all => "Skipping Unicode test since it depends on LibXML";
 use XML::Atom;
