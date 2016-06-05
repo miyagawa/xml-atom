@@ -5,7 +5,6 @@ use 5.008;
 
 name 'XML-Atom';
 all_from 'lib/XML/Atom.pm';
-auto_set_repository;
 
 requires('MIME::Base64');
 requires('URI');
