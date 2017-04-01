@@ -1,5 +1,6 @@
 # $Id$
 
+use lib '.';
 use inc::Module::Install;
 use 5.008;
 
