@@ -1,0 +1,96 @@
+{
+   "abstract" : "Atom feed and API implementation",
+   "author" : [
+      "Benjamin Trott, Tatsuhiko Miyagawa"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Minilla/v3.0.10, CPAN::Meta::Converter version 2.150010",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "XML-Atom",
+   "no_index" : {
+      "directory" : [
+         "t",
+         "xt",
+         "inc",
+         "share",
+         "eg",
+         "examples",
+         "author",
+         "builder"
+      ]
+   },
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.59"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build::Tiny" : "0.035"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Test::CPAN::Meta" : "0",
+            "Test::MinimumVersion::Fast" : "0.04",
+            "Test::PAUSE::Permissions" : "0.04",
+            "Test::Pod" : "1.41",
+            "Test::Spellunker" : "v0.2.7"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Class::Data::Inheritable" : "0",
+            "DateTime" : "0",
+            "DateTime::TimeZone" : "0",
+            "Digest::SHA1" : "0",
+            "LWP::UserAgent" : "0",
+            "MIME::Base64" : "0",
+            "URI" : "0",
+            "XML::LibXML" : "1.69",
+            "XML::XPath" : "0",
+            "perl" : "5.008001"
+         }
+      }
+   },
+   "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/miyagawa/xml-atom/issues"
+      },
+      "homepage" : "https://github.com/miyagawa/xml-atom",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/miyagawa/xml-atom.git",
+         "web" : "https://github.com/miyagawa/xml-atom"
+      }
+   },
+   "version" : "0.41",
+   "x_authority" : "cpan:MIYAGAWA",
+   "x_contributors" : [
+      "Benjamin Trott <ben@stupidfool.org>",
+      "Simon Wistow <simonw@cpan.org>",
+      "Tomas Doran <bobtfish@bobtfish.net>",
+      "Vince Veselosky <vince@control-escape.com>",
+      "emasaka <emasaka@gmail.com>",
+      "Andreas Marienborg <andreas.marienborg@gmail.com>",
+      "Yann Kerherve <yann@cyberion.net>",
+      "root <root@localhost.localdomain>",
+      "Christian Walde <walde.christian@googlemail.com>",
+      "Jonathan \"Duke\" Leto <jonathan@leto.net>",
+      "Tatsuhiko Miyagawa <miyagawa@bulknews.net>",
+      "tokuhirom <tokuhirom@gmail.com>",
+      "David Steinbrunner <dsteinbrunner@pobox.com>",
+      "Martin Atkins <mart@degeneration.co.uk>",
+      "Dave Cross <dave@dave.org.uk>",
+      "Tatsuhiko Miyagawa <miyagawa@gmail.com>"
+   ],
+   "x_serialization_backend" : "JSON::PP version 2.27400"
+}
