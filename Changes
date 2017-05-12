@@ -2,6 +2,13 @@ $Id$
 
 Revision history for XML::Atom
 
+{{$NEXT}}
+
+0.42  2017-05-12 14:33:09 JST
+    * Doc fixes
+    * Remove encoding pragma to support latest version of perl
+      https://rt.cpan.org/Ticket/Display.html?id=115101
+
 0.41  2011.09.26
     * Added a dependency to DateTime::TimeZone (leto)
 
