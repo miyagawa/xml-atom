@@ -19,17 +19,19 @@ BEGIN {
     } else {
         *{XML::Atom::DATETIME} = sub() {0};
     }
-    
-    local $^W = 0;
-    *XML::XPath::Function::namespace_uri = sub {
-        my $self = shift;
-        my($node, @params) = @_;
-        my $ns = $node->getNamespace($node->getPrefix);
-        if (!$ns) {
-            $ns = ($node->getNamespaces)[0];
-        }
-        XML::XPath::Literal->new($ns ? $ns->getExpanded : '');
-    };
+
+    if (!LIBXML() && XML::XPath->VERSION < 1.20) {
+        local $^W = 0;
+        *XML::XPath::Function::namespace_uri = sub {
+            my $self = shift;
+            my($node, @params) = @_;
+            my $ns = $node->getNamespace($node->getPrefix);
+            if (!$ns) {
+                $ns = ($node->getNamespaces)[0];
+            }
+            XML::XPath::Literal->new($ns ? $ns->getExpanded : '');
+        };
+    }
 
     $XML::Atom::ForceUnicode = 0;
     $XML::Atom::DefaultVersion = 0.3;
