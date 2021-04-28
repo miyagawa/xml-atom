@@ -6,7 +6,7 @@ requires 'LWP::UserAgent';
 requires 'MIME::Base64';
 requires 'URI';
 requires 'XML::LibXML', '2.0202';
-requires 'XML::XPath';
+requires 'XML::XPath', '1.20';
 requires 'perl', '5.008001';
 
 on build => sub {
