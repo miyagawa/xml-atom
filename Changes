@@ -3,8 +3,10 @@ $Id$
 Revision history for XML::Atom
 
 {{$NEXT}}
-    * Use Digest::SHA instead of Digest::SHA1
-    * Fix tests when no '.' is in @INC
+    * Use Digest::SHA instead of Digest::SHA1 #13
+    * Fix tests when no '.' is in @INC #14
+    * Enable expand_entities for XML::LibXML 2.0202 #20
+    * Bump dependency for XML::LibXML
 
 0.42  2017-05-12 14:33:09 JST
     * Doc fixes
