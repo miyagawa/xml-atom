@@ -4,7 +4,7 @@ package XML::Atom;
 use strict;
 
 use 5.008_001;
-our $VERSION = '0.42';
+our $VERSION = '0.43';
 
 BEGIN {
     @XML::Atom::EXPORT = qw( LIBXML DATETIME);

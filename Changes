@@ -3,6 +3,8 @@ $Id$
 Revision history for XML::Atom
 
 {{$NEXT}}
+
+0.43  2021-04-28 13:39:09 PDT
     * Use Digest::SHA instead of Digest::SHA1 #13
     * Fix tests when no '.' is in @INC #14
     * Enable expand_entities for XML::LibXML 2.0202 #20
