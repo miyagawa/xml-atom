@@ -29,5 +29,6 @@ jobs:
         with:
           cpanfile: cpanfile
           sudo: false
+          args: --quiet
       - name: Run Tests
         run: prove -lr t
