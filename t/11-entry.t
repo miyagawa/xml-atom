@@ -2,6 +2,7 @@
 
 use strict;
 
+use lib '.';
 use t::TestLib;
 use Test::More;
 use XML::Atom;
