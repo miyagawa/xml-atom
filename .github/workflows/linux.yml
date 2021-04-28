@@ -28,5 +28,6 @@ jobs:
         uses: perl-actions/install-with-cpanm@v1
         with:
           cpanfile: cpanfile
+          sudo: false
       - name: Run Tests
         run: prove -lr t
