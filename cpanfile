@@ -1,7 +1,7 @@
 requires 'Class::Data::Inheritable';
 requires 'DateTime';
 requires 'DateTime::TimeZone';
-requires 'Digest::SHA1';
+requires 'Digest::SHA';
 requires 'LWP::UserAgent';
 requires 'MIME::Base64';
 requires 'URI';
